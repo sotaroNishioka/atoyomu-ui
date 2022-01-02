@@ -1,13 +1,37 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+  User
+} from 'firebase/auth'
+import { useState } from 'react'
 import firebaseApp from '../lib/firebaseInit'
-const useUser = (redirectUrl = '/login') => {
+
+const useUser = () => {
   const auth = getAuth(firebaseApp)
-  const googleLogin = async () => {
-    await signInWithPopup(auth, new GoogleAuthProvider())
+  const [currentUser, setCurrentUser] = useState<User | null | undefined>(
+    undefined
+  )
+
+  onAuthStateChanged(auth, (user) => {
+    console.log(currentUser)
+    setCurrentUser(user)
+  })
+
+  const googleLogin = () => {
+    signInWithPopup(auth, new GoogleAuthProvider())
   }
+
+  const logOut = () => {
+    signOut(auth)
+  }
+
   return {
-    currentUser: auth.currentUser,
+    currentUser,
     googleLogin,
+    logOut
   }
 }
 
