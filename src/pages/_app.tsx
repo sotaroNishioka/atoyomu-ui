@@ -1,12 +1,14 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
 import MyThemeProvider from '../components/MyTheneProvider'
+import IndexProvider from '../lib/provider/IndexProvider'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>My page</title>
         <meta
@@ -15,9 +17,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <MyThemeProvider>
-        <Component {...pageProps} />
+        <IndexProvider>
+          <Component {...pageProps} />
+        </IndexProvider>
       </MyThemeProvider>
-    </React.Fragment>
+    </>
   )
   return <Component {...pageProps} />
 }

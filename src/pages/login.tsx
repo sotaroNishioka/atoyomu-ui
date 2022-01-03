@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import Logo from '../../public/icon.svg'
 import Auth from '../components/Auth'
 import Header from '../components/Header'
-import useUser from '../lib/useUser'
+import useUser from '../lib/hooks/useUser'
 
 const Login: NextPage = () => {
   const user = useUser()

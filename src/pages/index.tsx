@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Auth from '../components/Auth'
-import useUser from '../lib/useUser'
+import useUser from '../lib/hooks/useUser'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {

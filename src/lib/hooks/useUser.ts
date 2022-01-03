@@ -7,7 +7,7 @@ import {
   User
 } from 'firebase/auth'
 import { useState } from 'react'
-import firebaseApp from '../lib/firebaseInit'
+import firebaseApp from '../firebaseInit'
 
 const useUser = () => {
   const auth = getAuth(firebaseApp)

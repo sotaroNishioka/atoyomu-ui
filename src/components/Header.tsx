@@ -1,5 +1,6 @@
 import MailIcon from '@mui/icons-material/Mail'
 // import InboxIcon from '@mui/icons-material/MoveToInbox'
+import MenuIcon from '@mui/icons-material/Menu'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
 // import Divider from '@mui/material/Divider'
@@ -8,12 +9,15 @@ import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
 // import ListItemIcon from '@mui/material/ListItemIcon'
 // import ListItemText from '@mui/material/ListItemText'
 import React, { useEffect, useState } from 'react'
-import useUser from '../lib/useUser'
+import useDrawer from '../lib/hooks/useDrawer'
+import useUser from '../lib/hooks/useUser'
+import Drawer from './Drawer'
 
-function Header() {
+const Header = () => {
   const [isLogin, setIsLogin] = useState<boolean>(false)
   // const [isShowDrawer, setIsShowDrawer] = useState<boolean>(false)
   const user = useUser()
+  const drawer = useDrawer()
 
   useEffect(() => {
     if (user.currentUser === null) {
@@ -25,38 +29,25 @@ function Header() {
     }
   }, [user.currentUser])
 
-  // const list = (
-  //   <Box
-  //     sx={{ width: 250 }}
-  //     role="presentation"
-  //     onClick={() => setIsShowDrawer(false)}
-  //     onKeyDown={() => setIsShowDrawer(false)}
-  //   >
-  //     <List>
-  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-  //         <ListItem button key={text}>
-  //           <ListItemIcon>
-  //             {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-  //           </ListItemIcon>
-  //           <ListItemText primary={text} />
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
-  //         <ListItem button key={text}>
-  //           <ListItemIcon>
-  //             {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-  //           </ListItemIcon>
-  //           <ListItemText primary={text} />
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Box>
-  // )
-
-  const userMenu = (
+  const loginUserMenu = (
+    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+      <IconButton size="large" aria-label="show 4 new mails" color="secondary">
+        <Badge badgeContent={4} color="error">
+          <MailIcon />
+        </Badge>
+      </IconButton>
+      <IconButton
+        size="large"
+        aria-label="show 17 new notifications"
+        color="secondary"
+      >
+        <Badge badgeContent={17} color="error">
+          <NotificationsIcon />
+        </Badge>
+      </IconButton>
+    </Box>
+  )
+  const unregisteredUserMenu = (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
       <IconButton size="large" aria-label="show 4 new mails" color="secondary">
         <Badge badgeContent={4} color="error">
@@ -82,31 +73,30 @@ function Header() {
       elevation={0}
       sx={{ borderBottom: 1, borderColor: 'secondary.main' }}
     >
-      <Toolbar style={{ maxWidth: 1200 }}>
-        <Grid>
-          {/* <IconButton
-          size="large"
-          edge="start"
-          color="secondary"
-          aria-label="open drawer"
-          sx={{ mr: 2 }}
-          onClick={() => setIsShowDrawer(true)}
-        >
-          <MenuIcon />
-        </IconButton> */}
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Toolbar style={{ maxWidth: 1200, width: '100%' }}>
+          <IconButton
+            size="large"
+            edge="start"
+            color="secondary"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={drawer.openDrawer}
+          >
+            <MenuIcon />
+          </IconButton>
           <img height="28px" alt="icon" src="/icon.svg" />
           <Box sx={{ flexGrow: 1 }} />
-          {isLogin && userMenu}
-        </Grid>
-      </Toolbar>
-      {/* <Drawer
-        variant="persistent"
-        anchor="left"
-        open={isShowDrawer}
-        onClose={() => setIsShowDrawer(false)}
-      >
-        {list}
-      </Drawer> */}
+          {isLogin ? loginUserMenu : unregisteredUserMenu}
+        </Toolbar>
+      </Grid>
+      <Drawer />
     </AppBar>
   )
 }
