@@ -1,7 +1,7 @@
 import { Box, Card, Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Logo from '../../public/icon.svg'
 import Auth from '../components/Auth'
 import Header from '../components/Header'
@@ -19,9 +19,9 @@ const Login: NextPage = () => {
     }
   }, [user.currentUser])
 
-  const onClickLogin = () => {
-    user.googleLogin()
-  }
+  // const onClickLogin = () => {
+  //   user.googleLogin()
+  // }
 
   return (
     <Auth>

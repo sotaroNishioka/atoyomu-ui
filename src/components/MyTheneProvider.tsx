@@ -1,6 +1,7 @@
 import { CssBaseline } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import React, { ReactElement } from 'react'
+
 export default function MyThemeProvider({
   children
 }: {
@@ -10,13 +11,13 @@ export default function MyThemeProvider({
     palette: {
       primary: {
         main: '#FFFFFF',
-        light: '#595959'
+        light: '#808080'
         // dark: will be calculated from palette.primary.main,
         // contrastText: will be calculated to contrast with palette.primary.main
       },
       secondary: {
         light: '#F6F8FA',
-        main: '#595959',
+        main: '#808080',
         // dark: will be calculated from palette.secondary.main,
         contrastText: '#ffcc00'
       },
