@@ -3,7 +3,7 @@ import { ReactElement, useEffect } from 'react'
 import useUser from '../lib/hooks/useUser'
 
 const Auth = ({ children }: { children: ReactElement<any, any> }) => {
-  //router
+  // router
   const router = useRouter()
   const user = useUser()
 
@@ -13,7 +13,7 @@ const Auth = ({ children }: { children: ReactElement<any, any> }) => {
     }
   }, [user.currentUser])
 
-  //何もなければ次へ（そのまま処理）
+  // 何もなければ次へ（そのまま処理）
   return children
 }
 
