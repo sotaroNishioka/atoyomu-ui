@@ -3,7 +3,6 @@ import { ReactElement, useEffect } from 'react'
 import useUser from '../lib/hooks/useUser'
 
 const Auth = ({ children }: { children: ReactElement<any, any> }) => {
-  // router
   const router = useRouter()
   const user = useUser()
 

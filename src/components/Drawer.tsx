@@ -46,10 +46,12 @@ const Drawer = () => {
 
   return (
     <DrawerMUI
-      variant="persistent"
+      variant="temporary"
       anchor="left"
+      elevation={1}
       open={drawer.isOpen}
       onClose={drawer.closeDrawer}
+      BackdropProps={{ style: { backgroundColor: 'transparent' } }}
     >
       {list}
     </DrawerMUI>

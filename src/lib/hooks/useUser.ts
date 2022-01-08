@@ -16,7 +16,6 @@ const useUser = () => {
   )
 
   onAuthStateChanged(auth, (user) => {
-    console.log(currentUser)
     setCurrentUser(user)
   })
 
