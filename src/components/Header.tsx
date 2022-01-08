@@ -20,14 +20,14 @@ const Header = () => {
   const drawer = useDrawer()
 
   useEffect(() => {
-    if (user.currentUser === null) {
+    if (user.user === null) {
       setIsLogin(false)
       return
     }
-    if (user.currentUser !== undefined) {
+    if (user.user !== undefined) {
       setIsLogin(true)
     }
-  }, [user.currentUser])
+  }, [user.user])
 
   const loginUserMenu = (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

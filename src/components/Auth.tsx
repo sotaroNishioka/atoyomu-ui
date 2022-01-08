@@ -7,10 +7,10 @@ const Auth = ({ children }: { children: ReactElement<any, any> }) => {
   const user = useUser()
 
   useEffect(() => {
-    if (user.currentUser === null) {
+    if (user.user === null) {
       router.push('/login')
     }
-  }, [user.currentUser])
+  }, [user.user])
 
   // 何もなければ次へ（そのまま処理）
   return children

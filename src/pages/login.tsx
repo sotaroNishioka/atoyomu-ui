@@ -2,7 +2,6 @@ import { Box, Card, Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import Logo from '../../public/icon.svg'
 import Auth from '../components/Auth'
 import Header from '../components/Header'
 import useUser from '../lib/hooks/useUser'
@@ -13,11 +12,10 @@ const Login: NextPage = () => {
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    console.log(Logo)
-    if (user.currentUser !== null && user.currentUser !== undefined) {
+    if (user.user !== null && user.user !== undefined) {
       router.push('/')
     }
-  }, [user.currentUser])
+  }, [user.user])
 
   // const onClickLogin = () => {
   //   user.googleLogin()

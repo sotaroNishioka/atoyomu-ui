@@ -1,37 +1,6 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signInWithPopup,
-  signOut,
-  User
-} from 'firebase/auth'
-import { useState } from 'react'
-import firebaseApp from '../firebaseInit'
+import { useContext } from 'react'
+import { UserContext } from '../provider/UserProvider'
 
-const useUser = () => {
-  const auth = getAuth(firebaseApp)
-  const [currentUser, setCurrentUser] = useState<User | null | undefined>(
-    undefined
-  )
-
-  onAuthStateChanged(auth, (user) => {
-    setCurrentUser(user)
-  })
-
-  const googleLogin = () => {
-    signInWithPopup(auth, new GoogleAuthProvider())
-  }
-
-  const logOut = () => {
-    signOut(auth)
-  }
-
-  return {
-    currentUser,
-    googleLogin,
-    logOut
-  }
-}
+const useUser = () => useContext(UserContext)
 
 export default useUser
