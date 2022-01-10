@@ -46,9 +46,14 @@ const Drawer = () => {
 
   return (
     <DrawerMUI
-      variant="temporary"
+      PaperProps={{
+        sx: {
+          borderRight: 1,
+          borderRightColor: 'secondary.main'
+        }
+      }}
       anchor="left"
-      elevation={1}
+      elevation={0}
       open={drawer.isOpen}
       onClose={drawer.closeDrawer}
       BackdropProps={{ style: { backgroundColor: 'transparent' } }}
