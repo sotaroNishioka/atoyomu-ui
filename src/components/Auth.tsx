@@ -7,8 +7,9 @@ const Auth = ({ children }: { children: ReactElement<any, any> }) => {
   const user = useUser()
 
   useEffect(() => {
+    if (router.pathname === '/' || router.pathname === '/login') return
     if (user.user === null) {
-      router.push('/login')
+      router.push('/')
     }
   }, [user.user])
 

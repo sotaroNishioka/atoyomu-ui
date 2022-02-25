@@ -1,30 +1,24 @@
-import { Box, Card, Grid } from '@mui/material'
+import { Card, Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import Auth from '../components/Auth'
-import Header from '../components/Header'
 import useUser from '../lib/hooks/useUser'
 
-const Login: NextPage = () => {
+const Index: NextPage = () => {
   const user = useUser()
   const router = useRouter()
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (user.user !== null && user.user !== undefined) {
-      router.push('/')
+    if (user.user !== null) {
+      router.push('/home')
     }
   }, [user.user])
-
-  // const onClickLogin = () => {
-  //   user.googleLogin()
-  // }
 
   return (
     <Auth>
       <div>
-        <Header />
         <Grid
           container
           spacing={0}
@@ -34,10 +28,7 @@ const Login: NextPage = () => {
           style={{ minHeight: '200vh' }}
         >
           <Grid item xs={6}>
-            <Box>
-              <img height="34px" alt="icon" src="/icon.svg" />
-            </Box>
-            <Card variant="outlined">this is card</Card>
+            <Card variant="outlined">LOGIN</Card>
           </Grid>
         </Grid>
       </div>
@@ -45,4 +36,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default Index

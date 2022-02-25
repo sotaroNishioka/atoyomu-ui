@@ -18,15 +18,22 @@ type UserContextType = {
 export const UserContext = createContext<UserContextType>({} as UserContextType)
 
 const UserProvider = ({ children }: { children: ReactElement<any, any> }) => {
+  // init
   const auth = getAuth(firebaseApp)
+
+  // state
+  const [isLogin, setIsLogin] = useState<boolean>(false)
   const [currentUser, setCurrentUser] = useState<User | null | undefined>(
     undefined
-  )
+  ) //
 
+  // effect
   onAuthStateChanged(auth, (user) => {
+    setIsLogin(user !== null)
     setCurrentUser(user)
   })
 
+  // function
   const googleLogin = () => {
     signInWithPopup(auth, new GoogleAuthProvider())
   }
@@ -36,7 +43,7 @@ const UserProvider = ({ children }: { children: ReactElement<any, any> }) => {
   }
 
   const val = useMemo(
-    () => ({ user: currentUser, googleLogin, logOut }),
+    () => ({ user: currentUser, isLogin, googleLogin, logOut }),
     [currentUser]
   )
 
