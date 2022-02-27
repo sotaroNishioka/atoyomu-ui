@@ -39,6 +39,7 @@ const Header = () => {
 
   const onClickLogin = () => {
     router.push('/login')
+  }
 
   const loginUserMenu = (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
