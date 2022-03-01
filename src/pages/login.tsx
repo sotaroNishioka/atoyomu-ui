@@ -37,7 +37,6 @@ const Index: NextPage = () => {
           id="email"
           label="メールアドレス"
           name="email"
-          autoComplete="email"
           type="email"
           autoFocus
         />
@@ -49,7 +48,6 @@ const Index: NextPage = () => {
           label="パスワード"
           type="password"
           id="password"
-          autoComplete="current-password"
         />
         <Grid container justifyContent="center">
           <Grid item>
