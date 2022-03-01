@@ -28,7 +28,7 @@ const UserProvider = ({ children }: { children: ReactElement<any, any> }) => {
     undefined
   )
 
-  // effect
+  // effec
   onAuthStateChanged(auth, (user) => {
     setIsLogin(user !== null) // 初期状態ではundefinedなのでonAuthStateChangedではnull | Userが渡される
     setCurrentUser(user)
