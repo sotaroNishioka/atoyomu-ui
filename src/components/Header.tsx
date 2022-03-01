@@ -11,6 +11,7 @@ import {
   Typography
 } from '@mui/material'
 import Button from '@mui/material/Button'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
 import useDrawer from '../lib/hooks/useDrawer'
@@ -107,7 +108,7 @@ const Header = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <img height="28px" alt="icon" src="/icon.svg" />
+          <Image width="140" height="32" alt="icon" src="/icon.svg" />
           <Box sx={{ flexGrow: 1 }} />
           {user.isLogin ? loginUserMenu : unregisteredUserMenu}
         </Toolbar>

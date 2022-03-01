@@ -3,6 +3,7 @@ import { Facebook, Twitter } from '@mui/icons-material'
 import GoogleIcon from '@mui/icons-material/Google'
 import { Box, Button, Grid, Link, TextField } from '@mui/material'
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import useUser from '../lib/hooks/useUser'
@@ -27,8 +28,8 @@ const Index: NextPage = () => {
         alignItems: 'center'
       }}
     >
-      <Box maxWidth={320}>
-        <img style={{ width: '100%' }} alt="icon" src="/icon.svg" />
+      <Box>
+        <Image width="240" height="60" alt="icon" src="/icon.svg" />
       </Box>
       <Box maxWidth={380} sx={{ mt: 1 }}>
         <TextField

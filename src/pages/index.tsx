@@ -1,4 +1,4 @@
-import { Box, Card, Grid } from '@mui/material'
+import { Card, Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
@@ -30,9 +30,6 @@ const Index: NextPage = () => {
           style={{ minHeight: '200vh' }}
         >
           <Grid item xs={6}>
-            <Box>
-              <img height="34px" alt="icon" src="/icon.svg" />
-            </Box>
             <Card variant="outlined">this is card</Card>
           </Grid>
         </Grid>
