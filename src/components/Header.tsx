@@ -37,7 +37,7 @@ const Header = () => {
       <IconButton
         size="large"
         aria-label="show 4 new mails"
-        color="secondary.light"
+        // color="secondary.light"
       >
         <Badge badgeContent={4} color="error">
           <MailIcon />
