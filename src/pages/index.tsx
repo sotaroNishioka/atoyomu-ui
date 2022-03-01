@@ -12,10 +12,10 @@ const Index: NextPage = () => {
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (user.user !== null && user.user !== undefined) {
+    if (user.isLogin === true) {
       router.push('/home')
     }
-  }, [user.user])
+  }, [user.isLogin])
 
   return (
     <Auth>

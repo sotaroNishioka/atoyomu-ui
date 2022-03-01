@@ -10,14 +10,14 @@ export default function MyThemeProvider({
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#FFFFFF',
-        light: '#808080'
+        main: '#808080',
+        light: '#FFFFFF'
         // dark: will be calculated from palette.primary.main,
         // contrastText: will be calculated to contrast with palette.primary.main
       },
       secondary: {
-        light: '#F6F8FA',
-        main: '#808080',
+        main: '#4D4D4D',
+        light: '#CCCCCC',
         // dark: will be calculated from palette.secondary.main,
         contrastText: '#ffcc00'
       },

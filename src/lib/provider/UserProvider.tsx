@@ -11,6 +11,7 @@ import firebaseApp from '../firebaseInit'
 
 type UserContextType = {
   user: User | null | undefined
+  isLogin: boolean
   googleLogin: () => void
   logOut: () => void
 }
@@ -25,11 +26,11 @@ const UserProvider = ({ children }: { children: ReactElement<any, any> }) => {
   const [isLogin, setIsLogin] = useState<boolean>(false)
   const [currentUser, setCurrentUser] = useState<User | null | undefined>(
     undefined
-  ) //
+  )
 
   // effect
   onAuthStateChanged(auth, (user) => {
-    setIsLogin(user !== null)
+    setIsLogin(user !== null) // 初期状態ではundefinedなのでonAuthStateChangedではnull | Userが渡される
     setCurrentUser(user)
   })
 

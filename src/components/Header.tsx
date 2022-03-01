@@ -12,14 +12,13 @@ import {
 } from '@mui/material'
 import Button from '@mui/material/Button'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useDrawer from '../lib/hooks/useDrawer'
 import useUser from '../lib/hooks/useUser'
 import Drawer from './Drawer'
 
 const Header = () => {
   // state
-  const [isLogin, setIsLogin] = useState<boolean>(false)
 
   // context
   const user = useUser()
@@ -27,23 +26,19 @@ const Header = () => {
   const router = useRouter()
 
   // effect
-  useEffect(() => {
-    if (user.user === null) {
-      setIsLogin(false)
-      return
-    }
-    if (user.user !== undefined) {
-      setIsLogin(true)
-    }
-  }, [user.user])
 
+  // functions
   const onClickLogin = () => {
     router.push('/login')
   }
 
   const loginUserMenu = (
     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-      <IconButton size="large" aria-label="show 4 new mails" color="secondary">
+      <IconButton
+        size="large"
+        aria-label="show 4 new mails"
+        color="secondary.light"
+      >
         <Badge badgeContent={4} color="error">
           <MailIcon />
         </Badge>
@@ -64,14 +59,14 @@ const Header = () => {
       <Button
         onClick={onClickLogin}
         color="secondary"
+        variant="outlined"
         sx={{
-          backgroundColor: 'secondary.light'
+          borderColor: 'secondary.main'
         }}
       >
         <Typography
           sx={{
-            fontWeight: '600',
-            color: 'secondary.main'
+            fontWeight: '600'
           }}
         >
           {'　'}
@@ -86,7 +81,11 @@ const Header = () => {
     <AppBar
       position="absolute"
       elevation={0}
-      sx={{ borderBottom: 1, borderColor: 'secondary.main' }}
+      sx={{
+        borderBottom: 1,
+        borderColor: 'secondary.main',
+        backgroundColor: 'primary.light'
+      }}
     >
       <Grid
         container
@@ -96,7 +95,7 @@ const Header = () => {
         justifyContent="center"
       >
         <Toolbar style={{ maxWidth: 1200, width: '100%' }}>
-          {isLogin && (
+          {user.isLogin && (
             <IconButton
               size="large"
               edge="start"
@@ -110,7 +109,7 @@ const Header = () => {
           )}
           <img height="28px" alt="icon" src="/icon.svg" />
           <Box sx={{ flexGrow: 1 }} />
-          {isLogin ? loginUserMenu : unregisteredUserMenu}
+          {user.isLogin ? loginUserMenu : unregisteredUserMenu}
         </Toolbar>
       </Grid>
       <Drawer />
