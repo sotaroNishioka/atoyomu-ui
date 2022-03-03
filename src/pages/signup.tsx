@@ -8,16 +8,16 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import useUser from '../lib/hooks/useUser'
 
-const Login: NextPage = () => {
+const Index: NextPage = () => {
   const user = useUser()
   const router = useRouter()
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (user.isLogin) {
+    if (user.user !== null) {
       router.push('/home')
     }
-  }, [user.isLogin])
+  }, [user.user])
 
   return (
     <Box
@@ -129,4 +129,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default Index
