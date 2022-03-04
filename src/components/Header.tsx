@@ -15,6 +15,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
 import useDrawer from '../lib/hooks/useDrawer'
+import useSize from '../lib/hooks/useSize'
 import useUser from '../lib/hooks/useUser'
 import Drawer from './Drawer'
 
@@ -25,6 +26,7 @@ const Header = () => {
   const user = useUser()
   const drawer = useDrawer()
   const router = useRouter()
+  const { isMobileSize } = useSize()
 
   // effect
 
@@ -56,23 +58,46 @@ const Header = () => {
     </Box>
   )
   const unregisteredUserMenu = (
-    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+    <Box>
+      <Button
+        onClick={onClickLogin}
+        color="secondary"
+        variant="text"
+        size="small"
+        sx={{
+          borderColor: 'secondary.main',
+          marginRight: 1
+        }}
+      >
+        <Typography
+          variant="caption"
+          sx={{
+            fontWeight: '600',
+            paddingRight: 1,
+            paddingLeft: 1
+          }}
+        >
+          ログイン
+        </Typography>
+      </Button>
       <Button
         onClick={onClickLogin}
         color="secondary"
         variant="outlined"
+        size="small"
         sx={{
           borderColor: 'secondary.main'
         }}
       >
         <Typography
+          variant="caption"
           sx={{
-            fontWeight: '600'
+            fontWeight: '600',
+            paddingRight: 1,
+            paddingLeft: 1
           }}
         >
-          {'　'}
-          ログイン
-          {'　'}
+          新規登録
         </Typography>
       </Button>
     </Box>
@@ -108,7 +133,12 @@ const Header = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Image width="140" height="32" alt="icon" src="/icon.svg" />
+          <Image
+            width={isMobileSize ? '105' : '140'}
+            height={isMobileSize ? '24' : '32'}
+            alt="icon"
+            src="/icon.svg"
+          />
           <Box sx={{ flexGrow: 1 }} />
           {user.isLogin ? loginUserMenu : unregisteredUserMenu}
         </Toolbar>
