@@ -1,16 +1,7 @@
 import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
 import NotificationsIcon from '@mui/icons-material/Notifications'
-import {
-  AppBar,
-  Badge,
-  Box,
-  Grid,
-  IconButton,
-  Toolbar,
-  Typography
-} from '@mui/material'
-import Button from '@mui/material/Button'
+import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -18,6 +9,8 @@ import useDrawer from '../lib/hooks/useDrawer'
 import useSize from '../lib/hooks/useSize'
 import useUser from '../lib/hooks/useUser'
 import Drawer from './Drawer'
+import OutLinedButton from './OutLinedButton'
+import TextButton from './TextButton'
 
 const Header = () => {
   // state
@@ -33,6 +26,9 @@ const Header = () => {
   // functions
   const onClickLogin = () => {
     router.push('/login')
+  }
+  const onClickSignUp = () => {
+    router.push('/signup')
   }
 
   const loginUserMenu = (
@@ -59,47 +55,13 @@ const Header = () => {
   )
   const unregisteredUserMenu = (
     <Box>
-      <Button
-        onClick={onClickLogin}
-        color="secondary"
-        variant="text"
+      <TextButton
+        text="ログイン"
         size="small"
-        sx={{
-          borderColor: 'secondary.main',
-          marginRight: 1
-        }}
-      >
-        <Typography
-          variant="caption"
-          sx={{
-            fontWeight: '600',
-            paddingRight: 1,
-            paddingLeft: 1
-          }}
-        >
-          ログイン
-        </Typography>
-      </Button>
-      <Button
-        onClick={onClickLogin}
-        color="secondary"
-        variant="outlined"
-        size="small"
-        sx={{
-          borderColor: 'secondary.main'
-        }}
-      >
-        <Typography
-          variant="caption"
-          sx={{
-            fontWeight: '600',
-            paddingRight: 1,
-            paddingLeft: 1
-          }}
-        >
-          新規登録
-        </Typography>
-      </Button>
+        onClick={onClickSignUp}
+        sx={{ marginRight: 1 }}
+      />
+      <OutLinedButton size="small" text="新規登録" onClick={onClickLogin} />
     </Box>
   )
 

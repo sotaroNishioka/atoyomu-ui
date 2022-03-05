@@ -54,7 +54,7 @@ const Login: NextPage = () => {
           />
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 はじめての方はこちら
               </Link>
             </Grid>

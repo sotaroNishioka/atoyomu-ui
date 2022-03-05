@@ -2,7 +2,7 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
-import MyThemeProvider from '../components/MyTheneProvider'
+import MyThemeProvider from '../components/MyThemeProvider'
 import IndexProvider from '../lib/provider/IndexProvider'
 import '../styles/globals.css'
 
