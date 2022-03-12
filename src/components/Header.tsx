@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import useDrawer from '../lib/hooks/useDrawer'
 import useSize from '../lib/hooks/useSize'
-import useUser from '../lib/hooks/useUser'
+import useAuth from '../lib/hooks/useAuth'
 import Drawer from './Drawer'
 import OutLinedButton from './OutLinedButton'
 import TextButton from './TextButton'
@@ -16,7 +16,7 @@ const Header = () => {
   // state
 
   // context
-  const user = useUser()
+  const user = useAuth()
   const drawer = useDrawer()
   const router = useRouter()
   const { isMobileSize } = useSize()

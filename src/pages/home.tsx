@@ -3,11 +3,11 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Auth from '../components/Auth'
-import useUser from '../lib/hooks/useUser'
+import useAuth from '../lib/hooks/useAuth'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
-  const user = useUser()
+  const auth = useAuth()
 
   return (
     <Auth>
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
             Welcome to <a href="https://nextjs.org">Next.js!</a>
           </h1>
 
-          <button onClick={user.logOut}>ログアウト</button>
+          <button onClick={auth.logOut}>ログアウト</button>
         </main>
 
         <footer className={styles.footer}>

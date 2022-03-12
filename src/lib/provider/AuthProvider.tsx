@@ -9,16 +9,16 @@ import {
 import React, { createContext, ReactElement, useMemo, useState } from 'react'
 import firebaseApp from '../firebaseInit'
 
-type UserContextType = {
+type AuthContextType = {
   user: User | null | undefined
   isLogin: boolean
   googleLogin: () => void
   logOut: () => void
 }
 
-export const UserContext = createContext<UserContextType>({} as UserContextType)
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
-const UserProvider = ({ children }: { children: ReactElement<any, any> }) => {
+const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
   // init
   const auth = getAuth(firebaseApp)
 
@@ -48,7 +48,7 @@ const UserProvider = ({ children }: { children: ReactElement<any, any> }) => {
     [currentUser]
   )
 
-  return <UserContext.Provider value={val}>{children}</UserContext.Provider>
+  return <AuthContext.Provider value={val}>{children}</AuthContext.Provider>
 }
 
-export default UserProvider
+export default AuthProvider

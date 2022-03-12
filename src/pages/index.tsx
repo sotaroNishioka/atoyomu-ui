@@ -4,18 +4,18 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import Auth from '../components/Auth'
 import Header from '../components/Header'
-import useUser from '../lib/hooks/useUser'
+import useAuth from '../lib/hooks/useAuth'
 
 const Index: NextPage = () => {
-  const user = useUser()
+  const auth = useAuth()
   const router = useRouter()
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (user.isLogin === true) {
+    if (auth.isLogin === true) {
       router.push('/home')
     }
-  }, [user.isLogin])
+  }, [auth.isLogin])
 
   return (
     <Auth>

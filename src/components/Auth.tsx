@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 import { ReactElement, useEffect } from 'react'
-import useUser from '../lib/hooks/useUser'
+import useAuth from '../lib/hooks/useAuth'
 
 const Auth = ({ children }: { children: ReactElement<any, any> }) => {
   const router = useRouter()
-  const user = useUser()
+  const user = useAuth()
 
   useEffect(() => {
     if (router.pathname === '/' || router.pathname === '/login') return

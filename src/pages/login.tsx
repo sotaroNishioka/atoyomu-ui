@@ -6,18 +6,18 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import useUser from '../lib/hooks/useUser'
+import useAuth from '../lib/hooks/useAuth'
 
 const Login: NextPage = () => {
-  const user = useUser()
+  const auth = useAuth()
   const router = useRouter()
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (user.isLogin) {
+    if (auth.isLogin) {
       router.push('/home')
     }
-  }, [user.isLogin])
+  }, [auth.isLogin])
 
   return (
     <Container>
