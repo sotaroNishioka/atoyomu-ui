@@ -30,6 +30,7 @@ const Message: React.FC<{
         message={message}
         onClose={onClose}
         action={action}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       />
     )
   }
@@ -40,6 +41,7 @@ const Message: React.FC<{
       autoHideDuration={6000}
       message={message}
       onClose={onClose}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >
       <Alert severity="error" sx={{ width: '100%' }} action={action}>
         {message}
