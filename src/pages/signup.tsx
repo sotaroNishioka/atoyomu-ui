@@ -5,12 +5,15 @@ import { Box, Button, Container, Grid, Link, TextField } from '@mui/material'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAuth from '../lib/hooks/useAuth'
 
 const SignUp: NextPage = () => {
   const auth = useAuth()
   const router = useRouter()
+
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
@@ -34,6 +37,8 @@ const SignUp: NextPage = () => {
         </Box>
         <Box maxWidth={380} sx={{ mt: 1 }}>
           <TextField
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             margin="normal"
             required
             fullWidth
@@ -44,6 +49,8 @@ const SignUp: NextPage = () => {
             autoFocus
           />
           <TextField
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             margin="normal"
             required
             fullWidth
@@ -64,8 +71,9 @@ const SignUp: NextPage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={() => auth.singUpWithEmail(email, password)}
           >
-            ログイン
+            新規登録
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
@@ -89,7 +97,7 @@ const SignUp: NextPage = () => {
             }}
             startIcon={<GoogleIcon />}
           >
-            Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
+            Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
           </Button>
           <Button
             type="submit"
@@ -106,7 +114,7 @@ const SignUp: NextPage = () => {
             }}
             startIcon={<Facebook />}
           >
-            Facebook&nbsp;アカウントでログイン
+            Facebook&nbsp;アカウントで登録
           </Button>
           <Button
             type="submit"
@@ -123,7 +131,7 @@ const SignUp: NextPage = () => {
             }}
             startIcon={<Twitter />}
           >
-            Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
+            Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
           </Button>
         </Box>
       </Box>
