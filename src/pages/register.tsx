@@ -5,22 +5,17 @@ import { Box, Button, Container, Grid, Link, TextField } from '@mui/material'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import useAuth from '../lib/hooks/useAuth'
 
-const SignUp: NextPage = () => {
+const Register: NextPage = () => {
   const auth = useAuth()
   const router = useRouter()
 
-  const [email, setEmail] = useState<string>('')
-
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (auth.isLogin && auth.isEmailVerified) {
+    if (auth.isLogin) {
       router.push('/home')
-    }
-    if (auth.isLogin && !auth.isEmailVerified) {
-      router.push('/verifyemail')
     }
   }, [auth.isLogin])
 
@@ -39,8 +34,6 @@ const SignUp: NextPage = () => {
         </Box>
         <Box maxWidth={380} sx={{ mt: 1 }}>
           <TextField
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
             margin="normal"
             required
             fullWidth
@@ -50,10 +43,19 @@ const SignUp: NextPage = () => {
             type="email"
             autoFocus
           />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="パスワード"
+            type="password"
+            id="password"
+          />
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="/login" variant="body2">
-                登録済みの方はこちら
+              <Link href="/signup" variant="body2">
+                はじめての方はこちら
               </Link>
             </Grid>
           </Grid>
@@ -62,9 +64,8 @@ const SignUp: NextPage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => auth.singUpWithEmail(email)}
           >
-            新規登録
+            ログイン
           </Button>
           <Grid container justifyContent="center">
             <Grid item>
@@ -88,7 +89,7 @@ const SignUp: NextPage = () => {
             }}
             startIcon={<GoogleIcon />}
           >
-            Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
+            Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
           </Button>
           <Button
             type="submit"
@@ -105,7 +106,7 @@ const SignUp: NextPage = () => {
             }}
             startIcon={<Facebook />}
           >
-            Facebook&nbsp;アカウントで登録
+            Facebook&nbsp;アカウントでログイン
           </Button>
           <Button
             type="submit"
@@ -122,7 +123,7 @@ const SignUp: NextPage = () => {
             }}
             startIcon={<Twitter />}
           >
-            Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
+            Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
           </Button>
         </Box>
       </Box>
@@ -130,4 +131,4 @@ const SignUp: NextPage = () => {
   )
 }
 
-export default SignUp
+export default Register

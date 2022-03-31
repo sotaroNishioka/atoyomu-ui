@@ -7,9 +7,21 @@ const Auth = ({ children }: { children: ReactElement<any, any> }) => {
   const user = useAuth()
 
   useEffect(() => {
-    if (router.pathname === '/' || router.pathname === '/login') return
-    if (user.user === null) {
-      router.push('/')
+    if (
+      router.pathname === '/' ||
+      router.pathname === '/login' ||
+      router.pathname === '/signup' ||
+      router.pathname === '/verifyemail'
+    )
+      return
+    if (user.isLogin === false) {
+      // router.push('/')
+    }
+    if (user.isLogin === true && user.isEmailVerified === false) {
+      console.log(
+        'if (user.isLogin === true && user.isEmailVerified === false) {'
+      )
+      // router.push('/verifyemail')
     }
   }, [user.user])
 

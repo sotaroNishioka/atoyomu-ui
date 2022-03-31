@@ -2,27 +2,37 @@
 import { Facebook, Twitter } from '@mui/icons-material'
 import GoogleIcon from '@mui/icons-material/Google'
 import { Box, Button, Container, Grid, Link, TextField } from '@mui/material'
+import {
+  getAuth,
+  isSignInWithEmailLink,
+  signInWithEmailLink
+} from 'firebase/auth'
 import type { NextPage } from 'next'
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import useAuth from '../lib/hooks/useAuth'
 
 const SignUp: NextPage = () => {
   const auth = useAuth()
-  const router = useRouter()
 
   const [email, setEmail] = useState<string>('')
+  // const [password, setPassword] = useState<string>('')
+
+  const firebaseAuth = getAuth()
+  useEffect(() => {
+    if (isSignInWithEmailLink(firebaseAuth, window.location.href)) {
+      const emailArg = window.localStorage.getItem('emailForSignIn')
+      if (emailArg !== null) {
+        try {
+          signInWithEmailLink(firebaseAuth, emailArg, window.location.href)
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    }
+  }, [])
 
   // ログイン済みの場合は管理画面に遷移
-  useEffect(() => {
-    if (auth.isLogin && auth.isEmailVerified) {
-      router.push('/home')
-    }
-    if (auth.isLogin && !auth.isEmailVerified) {
-      router.push('/verifyemail')
-    }
-  }, [auth.isLogin])
 
   return (
     <Container>
@@ -50,6 +60,17 @@ const SignUp: NextPage = () => {
             type="email"
             autoFocus
           />
+          {/* <TextField
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="パスワード"
+            type="password"
+            id="password"
+          /> */}
           <Grid container justifyContent="center">
             <Grid item>
               <Link href="/login" variant="body2">
