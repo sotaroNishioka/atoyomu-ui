@@ -6,7 +6,7 @@ ${email}様
 （現段階では登録完了しておりません）
 
 「ATOYOMU」本登録リンク
-${process.env.HOST}/register?id=${registerId}
+${process.env.NEXT_PUBLIC_HOST}/register?id=${registerId}
 
 
 なお、何かご不明な点や、お困りのことがございましたら、 以下問い合わせ先よりご連絡ください。
@@ -24,7 +24,7 @@ ${process.env.HOST}/register?id=${registerId}
 nishiokanandesuka@gmail.com
 
 「ATOYOMU」
-${process.env.HOST}
+${process.env.NEXT_PUBLIC_HOST}
 
 -------------------------------------------------
 `
