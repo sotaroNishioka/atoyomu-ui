@@ -5,7 +5,7 @@ import {
   Timestamp
 } from 'firebase/firestore'
 import { registerMail } from '../../static/mail'
-import { addTemporarilyRegisterConverter } from '../firebase/converter'
+import { temporarilyRegisterConverter } from '../firebase/converter'
 import { db } from '../firebase/firebaseInit'
 import { addTime } from '../util/uuid'
 
@@ -20,7 +20,7 @@ const useMail = () => {
   const sendSignUpMail = async (email: string) => {
     const { id: registerId } = await addDoc(
       collection(db, 'temporarilyRegister').withConverter(
-        addTemporarilyRegisterConverter
+        temporarilyRegisterConverter
       ),
       {
         email,

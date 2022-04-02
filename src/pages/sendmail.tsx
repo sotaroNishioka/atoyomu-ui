@@ -44,7 +44,7 @@ const SignUp: NextPage = () => {
             color="primary"
             fontWeight="bold"
             align="center"
-            variant="h4"
+            variant="h5"
           >
             Thank You!!
           </Typography>

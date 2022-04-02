@@ -1,10 +1,12 @@
-const isEmail = (val: string) => {
+export const isValidEmail = (val: string) => {
   if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val)) {
     return true
   }
   return false
 }
 
-export default {
-  isEmail
+export const isValidPassword = (val: string) => {
+  const regex =
+    /^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])|(?=.*[a-z])(?=.*[A-Z])(?=.*[!"#$%&'()*+\-.,/:;<=>?@[\\\]^_`{|}~])|(?=.*[A-Z])(?=.*[0-9])(?=.*[!"#$%&'()*+\-.,/:;<=>?@[\\\]^_`{|}~])|(?=.*[a-z])(?=.*[0-9])(?=.*[!"#$%&'()*+\-.,/:;<=>?@[\\\]^_`{|}~]))([a-zA-Z0-9!"#$%&'()*+\-.,/:;<=>?@[\\\]^_`{|}~]){8,}$/
+  return regex.test(val)
 }

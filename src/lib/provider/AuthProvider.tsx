@@ -1,4 +1,5 @@
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -6,18 +7,29 @@ import {
   signOut,
   User
 } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import React, { createContext, ReactElement, useMemo, useState } from 'react'
-import firebaseApp from '../firebase/firebaseInit'
+import {
+  EMAIL_ALREADY_IN_USE,
+  EXPIRED_TEMPORALY_REGISTER,
+  INVALID_TEMPORALY_REGISTER,
+  SIGNUP_UNEXPECTED_ERROR
+} from '../../static/message'
+import { temporarilyRegisterConverter } from '../firebase/converter'
+import firebaseApp, { db } from '../firebase/firebaseInit'
 import useMail from '../hooks/useMail'
+import useMessage from '../hooks/useMessage'
 
 type AuthContextType = {
   user: User | null | undefined
   isLogin: boolean
   isEmailVerified: boolean
-  singUpWithEmail: (email: string) => void
+  temporarilyRegister: (email: string) => void
   googleLogin: () => void
   logOut: () => void
+  getEmailByRegisterId: (id: string | undefined | string[]) => Promise<string>
+  signUpWithEmail: (email: string, password: string) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -25,10 +37,11 @@ export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
   // init
   const auth = getAuth(firebaseApp)
-  const router = useRouter()
-  const mail = useMail()
 
   // hooks
+  const router = useRouter()
+  const mail = useMail()
+  const message = useMessage()
 
   // state
   const [isLogin, setIsLogin] = useState<boolean>(false)
@@ -47,7 +60,7 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
   })
 
   // function
-  const singUpWithEmail = async (email: string) => {
+  const temporarilyRegister = async (email: string) => {
     mail.sendSignUpMail(email)
     router.push('/sendmail')
   }
@@ -60,14 +73,54 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
     signOut(auth)
   }
 
+  const getEmailByRegisterId = async (
+    id: string | undefined | string[]
+  ): Promise<string> => {
+    if (typeof id !== 'string') {
+      message.showMessage(INVALID_TEMPORALY_REGISTER)
+      return ''
+    }
+    const registerDetail = await (
+      await getDoc(
+        doc(db, 'temporarilyRegister', id).withConverter(
+          temporarilyRegisterConverter
+        )
+      )
+    ).data()
+    if (registerDetail === undefined) {
+      message.showMessage(INVALID_TEMPORALY_REGISTER)
+      return ''
+    }
+    if (registerDetail.expiredAt < new Date()) {
+      message.showMessage(EXPIRED_TEMPORALY_REGISTER)
+      return ''
+    }
+    return registerDetail.email
+  }
+
+  const signUpWithEmail = async (email: string, password: string) => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+    } catch (error: any) {
+      const errorCode = error.code
+      if (errorCode === 'auth/email-already-in-use') {
+        message.showMessage(EMAIL_ALREADY_IN_USE)
+        return
+      }
+      message.showMessage(SIGNUP_UNEXPECTED_ERROR)
+    }
+  }
+
   const val = useMemo(
     () => ({
       user: currentUser,
       isLogin,
       isEmailVerified,
-      singUpWithEmail,
+      temporarilyRegister,
       googleLogin,
-      logOut
+      logOut,
+      getEmailByRegisterId,
+      signUpWithEmail
     }),
     [currentUser]
   )

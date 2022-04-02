@@ -12,7 +12,7 @@ import { TemporarilyRegister } from '../type/db'
  * fireStoreからの取得時にservertimestamp型をdateに変換する
  * @module addTemporarilyRegisterConverter
  */
-export const addTemporarilyRegisterConverter: FirestoreDataConverter<TemporarilyRegister> =
+export const temporarilyRegisterConverter: FirestoreDataConverter<TemporarilyRegister> =
   {
     toFirestore(temporarilyRegister): DocumentData {
       return temporarilyRegister

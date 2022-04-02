@@ -12,10 +12,7 @@ type MessageContextType = {
   message: string
   type: 'default' | 'warning' | 'error' | 'success'
   closeMessage: () => void
-  showMessage: (arg: {
-    message: string
-    type?: 'default' | 'warning' | 'error' | 'success'
-  }) => void
+  showMessage: (arg: { message: string; type: string }) => void
 }
 
 export const MessageContext = createContext<MessageContextType>(
@@ -33,18 +30,20 @@ const MessageProvider = ({
     'default'
   )
   const closeMessage = useCallback(() => setIsShow(false), [])
-  const showMessage = useCallback(
-    (arg: {
-      message: string
-      type?: 'default' | 'warning' | 'error' | 'success'
-    }) => {
-      const { message: messageArg, type: typeArg } = arg
-      setMessage(messageArg)
-      setType(typeArg === undefined ? 'default' : typeArg)
-      setIsShow(true)
-    },
-    []
-  )
+  const showMessage = useCallback((arg: { message: string; type: string }) => {
+    const { message: messageArg, type: typeArg } = arg
+    setMessage(messageArg)
+    setType(
+      typeArg === undefined ||
+        (typeArg !== 'default' &&
+          typeArg !== 'error' &&
+          typeArg !== 'success' &&
+          typeArg !== 'warning')
+        ? 'default'
+        : typeArg
+    )
+    setIsShow(true)
+  }, [])
   const val = useMemo(
     () => ({ isShow, message, type, closeMessage, showMessage }),
     [isShow]
