@@ -88,7 +88,7 @@ const Login: NextPage = () => {
         }}
       >
         <Box sx={{ mb: 4 }}>
-          <Image width="240" height="60" alt="icon" src="/icon.svg" />
+          <Image width="300" height="75" alt="icon" src="/icon.svg" />
         </Box>
         <Box maxWidth={480} sx={{ width: 1 }}>
           <TextField

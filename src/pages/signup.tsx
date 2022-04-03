@@ -1,47 +1,80 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Facebook, Twitter } from '@mui/icons-material'
 import GoogleIcon from '@mui/icons-material/Google'
-import { Box, Button, Container, Grid, Link, TextField } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  FormHelperText,
+  Grid,
+  Link,
+  TextField
+} from '@mui/material'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import useAuth from '../lib/hooks/useAuth'
+import useKeyboard from '../lib/hooks/useKeyboard'
+import { isValidEmail } from '../lib/util/validator'
 
 const SignUp: NextPage = () => {
+  // hooks
   const auth = useAuth()
   const router = useRouter()
+  const keyBoard = useKeyboard()
 
+  // state
   const [email, setEmail] = useState<string>('')
+  const [emailError, setEmailError] = useState<string>('')
 
-  // ログイン済みの場合は管理画面に遷移
+  // effect
   useEffect(() => {
     if (auth.isLogin && auth.isEmailVerified) {
       router.push('/home')
     }
-    if (auth.isLogin && !auth.isEmailVerified) {
-      router.push('/verifyemail')
-    }
   }, [auth.isLogin])
+
+  /**
+   * メールでのログインサブミット時の処理。
+   * メールアドレスやパスワードの内容が適したフォーマットであるか確認してから、ログイン処理を実行する。
+   * @returns void
+   */
+  const onSubmitEmailSignup = async () => {
+    let error = false
+    setEmailError('')
+    if (isValidEmail(email) === false) {
+      setEmailError('メールアドレスの形式が正しくありません。')
+      error = true
+    }
+    if (email === '') {
+      setEmailError('メールアドレスを入力してください。')
+      error = true
+    }
+    if (error) {
+      return
+    }
+    await auth.temporarilyRegister(email)
+  }
 
   return (
     <Container>
       <Box
         sx={{
-          marginTop: 8,
+          mt: 8,
+          mb: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
         }}
       >
-        <Box>
-          <Image width="240" height="60" alt="icon" src="/icon.svg" />
+        <Box sx={{ mb: 4 }}>
+          <Image width="300" height="75" alt="icon" src="/icon.svg" />
         </Box>
-        <Box maxWidth={380} sx={{ mt: 1 }}>
+        <Box maxWidth={480} sx={{ width: 1 }}>
           <TextField
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="email"
@@ -49,7 +82,14 @@ const SignUp: NextPage = () => {
             name="email"
             type="email"
             autoFocus
+            onChange={(event) => setEmail(event.target.value)}
+            onKeyPress={(event) =>
+              keyBoard.onPressEnter(onSubmitEmailSignup, event)
+            }
           />
+          <FormHelperText error>
+            {emailError === '' ? '　' : emailError}
+          </FormHelperText>
           <Grid container justifyContent="center">
             <Grid item>
               <Link href="/login" variant="body2">
@@ -62,7 +102,7 @@ const SignUp: NextPage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => auth.temporarilyRegister(email)}
+            onClick={onSubmitEmailSignup}
           >
             新規登録
           </Button>
