@@ -1,5 +1,9 @@
 export const isValidEmail = (val: string) => {
-  if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(val)) {
+  if (
+    /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/.test(
+      val
+    )
+  ) {
     return true
   }
   return false

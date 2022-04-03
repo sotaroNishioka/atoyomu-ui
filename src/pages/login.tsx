@@ -1,40 +1,98 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Facebook, Twitter } from '@mui/icons-material'
 import GoogleIcon from '@mui/icons-material/Google'
-import { Box, Button, Container, Grid, Link, TextField } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  FormHelperText,
+  Grid,
+  Link,
+  TextField
+} from '@mui/material'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAuth from '../lib/hooks/useAuth'
+import useKeyboard from '../lib/hooks/useKeyboard'
+import { isValidEmail, isValidPassword } from '../lib/util/validator'
 
 const Login: NextPage = () => {
+  // hooks
   const auth = useAuth()
   const router = useRouter()
+  const keyBoard = useKeyboard()
 
-  // ログイン済みの場合は管理画面に遷移
+  // state
+  const [email, setEmail] = useState<string>('')
+  const [emailError, setEmailError] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [passwordError, setPasswordError] = useState<string>('')
+
+  // effect
   useEffect(() => {
     if (auth.isLogin) {
       router.push('/home')
     }
   }, [auth.isLogin])
 
+  // functions
+
+  /**
+   * メールでのログインサブミット時の処理。
+   * メールアドレスやパスワードの内容が適したフォーマットであるか確認してから、ログイン処理を実行する。
+   * @returns void
+   */
+  const onSubmitEmailLogin = async () => {
+    let error = false
+    setEmailError('')
+    setPasswordError('')
+    if (isValidEmail(email) === false) {
+      setEmailError('メールアドレスの形式が正しくありません。')
+      error = true
+    }
+    if (email === '') {
+      setEmailError('メールアドレスを入力してください。')
+      error = true
+    }
+    if (isValidPassword(password) === false) {
+      setPasswordError(
+        'パスワードには英小文字、大文字、数字、記号のうち3種類以上使用してください。'
+      )
+      error = true
+    }
+    if (password.length > 0 && (password.length < 8 || password.length > 16)) {
+      setPasswordError('パスワードの長さは8-16文字です。')
+      error = true
+    }
+    if (password === '') {
+      setPasswordError('パスワードを入力してください。')
+      error = true
+    }
+    if (error) {
+      return
+    }
+    await auth.signInWithEmail(email, password)
+  }
+
   return (
     <Container>
       <Box
         sx={{
-          marginTop: 8,
+          mt: 8,
+          mb: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
         }}
       >
-        <Box>
+        <Box sx={{ mb: 4 }}>
           <Image width="240" height="60" alt="icon" src="/icon.svg" />
         </Box>
-        <Box maxWidth={380} sx={{ mt: 1 }}>
+        <Box maxWidth={480} sx={{ width: 1 }}>
           <TextField
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             id="email"
@@ -42,16 +100,30 @@ const Login: NextPage = () => {
             name="email"
             type="email"
             autoFocus
+            onChange={(event) => setEmail(event.target.value)}
+            onKeyPress={(event) =>
+              keyBoard.onPressEnter(onSubmitEmailLogin, event)
+            }
           />
+          <FormHelperText error>
+            {emailError === '' ? '　' : emailError}
+          </FormHelperText>
           <TextField
-            margin="normal"
+            margin="dense"
             required
             fullWidth
             name="password"
             label="パスワード"
             type="password"
             id="password"
+            onChange={(event) => setPassword(event.target.value)}
+            onKeyPress={(event) =>
+              keyBoard.onPressEnter(onSubmitEmailLogin, event)
+            }
           />
+          <FormHelperText error>
+            {passwordError === '' ? '　' : passwordError}
+          </FormHelperText>
           <Grid container justifyContent="center">
             <Grid item>
               <Link href="/signup" variant="body2">
@@ -59,72 +131,78 @@ const Login: NextPage = () => {
               </Link>
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            ログイン
-          </Button>
+
           <Grid container justifyContent="center">
             <Grid item>
-              <Link href="#" variant="body2">
-                パスワードをお忘れの方はこちら
-              </Link>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={onSubmitEmailLogin}
+              >
+                ログイン
+              </Button>
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    パスワードをお忘れの方はこちら
+                  </Link>
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 2,
+                  mb: 2,
+                  backgroundColor: '#4285F4',
+                  '&:hover': {
+                    backgroundColor: '#fff',
+                    color: '#4285F4'
+                  }
+                }}
+                startIcon={<GoogleIcon />}
+              >
+                Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 1,
+                  mb: 2,
+                  backgroundColor: '#3B5998',
+                  '&:hover': {
+                    backgroundColor: '#fff',
+                    color: '#3B5998'
+                  }
+                }}
+                startIcon={<Facebook />}
+              >
+                Facebook&nbsp;アカウントでログイン
+              </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 1,
+                  mb: 2,
+                  backgroundColor: '#00acee',
+                  '&:hover': {
+                    backgroundColor: '#fff',
+                    color: '#00acee'
+                  }
+                }}
+                startIcon={<Twitter />}
+              >
+                Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
+              </Button>
             </Grid>
           </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              mt: 2,
-              mb: 2,
-              backgroundColor: '#4285F4',
-              '&:hover': {
-                backgroundColor: '#fff',
-                color: '#4285F4'
-              }
-            }}
-            startIcon={<GoogleIcon />}
-          >
-            Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              mt: 1,
-              mb: 2,
-              backgroundColor: '#3B5998',
-              '&:hover': {
-                backgroundColor: '#fff',
-                color: '#3B5998'
-              }
-            }}
-            startIcon={<Facebook />}
-          >
-            Facebook&nbsp;アカウントでログイン
-          </Button>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{
-              mt: 1,
-              mb: 2,
-              backgroundColor: '#00acee',
-              '&:hover': {
-                backgroundColor: '#fff',
-                color: '#00acee'
-              }
-            }}
-            startIcon={<Twitter />}
-          >
-            Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントでログイン
-          </Button>
         </Box>
       </Box>
     </Container>

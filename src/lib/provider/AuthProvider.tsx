@@ -3,6 +3,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   User
@@ -30,6 +31,7 @@ type AuthContextType = {
   logOut: () => void
   getEmailByRegisterId: (id: string | undefined | string[]) => Promise<string>
   signUpWithEmail: (email: string, password: string) => Promise<void>
+  signInWithEmail: (email: string, password: string) => Promise<void>
 }
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
@@ -111,6 +113,19 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
     }
   }
 
+  const signInWithEmail = async (email: string, password: string) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+    } catch (error: any) {
+      const errorCode = error.code
+      if (errorCode === 'auth/email-already-in-use') {
+        message.showMessage(EMAIL_ALREADY_IN_USE)
+        return
+      }
+      message.showMessage(SIGNUP_UNEXPECTED_ERROR)
+    }
+  }
+
   const val = useMemo(
     () => ({
       user: currentUser,
@@ -120,7 +135,8 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
       googleLogin,
       logOut,
       getEmailByRegisterId,
-      signUpWithEmail
+      signUpWithEmail,
+      signInWithEmail
     }),
     [currentUser]
   )

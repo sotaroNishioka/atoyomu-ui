@@ -5,9 +5,9 @@ import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
+import useAuth from '../lib/hooks/useAuth'
 import useDrawer from '../lib/hooks/useDrawer'
 import useSize from '../lib/hooks/useSize'
-import useAuth from '../lib/hooks/useAuth'
 import Drawer from './Drawer'
 import OutLinedButton from './OutLinedButton'
 import TextButton from './TextButton'
@@ -58,10 +58,10 @@ const Header = () => {
       <TextButton
         text="ログイン"
         size="small"
-        onClick={onClickSignUp}
+        onClick={onClickLogin}
         sx={{ marginRight: 1 }}
       />
-      <OutLinedButton size="small" text="新規登録" onClick={onClickLogin} />
+      <OutLinedButton size="small" text="新規登録" onClick={onClickSignUp} />
     </Box>
   )
 

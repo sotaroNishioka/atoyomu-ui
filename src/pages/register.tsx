@@ -42,15 +42,11 @@ const Register: NextPage = () => {
 
   // 入力内容がすべて正しい場合は決定ボタンを押下可能にする
   useEffect(() => {
-    if (
-      isValidEmail(email) === false ||
-      isValidPassword(password1) === false ||
-      password1 !== password2
-    ) {
-      setIsValidInput(false)
-      return
-    }
-    setIsValidInput(true)
+    setIsValidInput(
+      isValidEmail(email) &&
+        isValidPassword(password1) &&
+        password1 === password2
+    )
   }, [password1, password2, email])
 
   const onClickSignUp = () => {
@@ -71,7 +67,7 @@ const Register: NextPage = () => {
         <Box sx={{ mb: 4 }}>
           <Image width="240" height="60" alt="icon" src="/icon.svg" />
         </Box>
-        <Box maxWidth={600} sx={{ width: 1 }}>
+        <Box maxWidth={480} sx={{ width: 1 }}>
           <Typography
             color="primary"
             fontWeight="bold"
@@ -151,7 +147,7 @@ const Register: NextPage = () => {
             variant="contained"
             onClick={onClickSignUp}
             sx={{ mt: 3, mb: 2 }}
-            disabled={isValidInput === false}
+            disabled={!isValidInput}
           >
             ログイン
           </Button>
