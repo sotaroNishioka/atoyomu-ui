@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useState
 } from 'react'
-import Message from '../../components/Message'
+import Message from '../../components/ui-parts/Message'
 
 type MessageContextType = {
   isShow: boolean

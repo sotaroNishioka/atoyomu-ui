@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { ReactElement, useEffect } from 'react'
-import useAuth from '../lib/hooks/useAuth'
+import useAuth from '../../common/hooks/useAuth'
 
 const Auth = ({ children }: { children: ReactElement<any, any> }) => {
   const router = useRouter()

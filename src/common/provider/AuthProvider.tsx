@@ -11,16 +11,16 @@ import {
 import { doc, getDoc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import React, { createContext, ReactElement, useMemo, useState } from 'react'
+import { temporarilyRegisterConverter } from '../firebase/converter'
+import firebaseApp, { db } from '../firebase/firebaseInit'
+import useMail from '../hooks/useMail'
+import useMessage from '../hooks/useMessage'
 import {
   EMAIL_ALREADY_IN_USE,
   EXPIRED_TEMPORALY_REGISTER,
   INVALID_TEMPORALY_REGISTER,
   SIGNUP_UNEXPECTED_ERROR
-} from '../../static/message'
-import { temporarilyRegisterConverter } from '../firebase/converter'
-import firebaseApp, { db } from '../firebase/firebaseInit'
-import useMail from '../hooks/useMail'
-import useMessage from '../hooks/useMessage'
+} from '../static/texts/message'
 
 type AuthContextType = {
   user: User | null | undefined

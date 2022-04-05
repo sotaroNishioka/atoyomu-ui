@@ -10,7 +10,8 @@ import {
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import useAuth from '../lib/hooks/useAuth'
+import useAuth from '../common/hooks/useAuth'
+import { AppLogo } from '../common/static/images'
 
 const SignUp: NextPage = () => {
   const auth = useAuth()
@@ -45,7 +46,7 @@ const SignUp: NextPage = () => {
         }}
       >
         <Box>
-          <Image width="240" height="60" alt="icon" src="/icon.svg" />
+          <Image width="240" height="60" alt="icon" src={AppLogo} />
         </Box>
         <Box maxWidth={380} sx={{ mt: 1 }}>
           <TextField

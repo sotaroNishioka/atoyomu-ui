@@ -8,7 +8,7 @@ import {
 } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import useDrawer from '../lib/hooks/useDrawer'
+import useDrawer from '../../common/hooks/useDrawer'
 
 const Drawer = () => {
   const drawer = useDrawer()

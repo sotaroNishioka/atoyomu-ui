@@ -4,7 +4,7 @@ import {
   serverTimestamp,
   Timestamp
 } from 'firebase/firestore'
-import { registerMail } from '../../static/mail'
+import { registerMail } from '../static/texts/mail'
 import { temporarilyRegisterConverter } from '../firebase/converter'
 import { db } from '../firebase/firebaseInit'
 import { addTime } from '../util/uuid'

@@ -5,12 +5,13 @@ import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
-import useAuth from '../lib/hooks/useAuth'
-import useDrawer from '../lib/hooks/useDrawer'
-import useSize from '../lib/hooks/useSize'
+import useAuth from '../../common/hooks/useAuth'
+import useDrawer from '../../common/hooks/useDrawer'
+import useSize from '../../common/hooks/useSize'
+import { AppLogo } from '../../common/static/images'
+import OutLinedButton from '../ui-elements/OutLinedButton'
+import TextButton from '../ui-elements/TextButton'
 import Drawer from './Drawer'
-import OutLinedButton from './OutLinedButton'
-import TextButton from './TextButton'
 
 const Header = () => {
   // state
@@ -99,7 +100,7 @@ const Header = () => {
             width={isMobileSize ? '105' : '140'}
             height={isMobileSize ? '24' : '32'}
             alt="icon"
-            src="/icon.svg"
+            src={AppLogo}
           />
           <Box sx={{ flexGrow: 1 }} />
           {user.isLogin ? loginUserMenu : unregisteredUserMenu}

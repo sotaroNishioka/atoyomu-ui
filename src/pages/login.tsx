@@ -14,9 +14,10 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import useAuth from '../lib/hooks/useAuth'
-import useKeyboard from '../lib/hooks/useKeyboard'
-import { isValidEmail, isValidPassword } from '../lib/util/validator'
+import useAuth from '../common/hooks/useAuth'
+import useKeyboard from '../common/hooks/useKeyboard'
+import { AppLogo } from '../common/static/images'
+import { isValidEmail, isValidPassword } from '../common/util/validator'
 
 const Login: NextPage = () => {
   // hooks
@@ -88,7 +89,7 @@ const Login: NextPage = () => {
         }}
       >
         <Box sx={{ mb: 4 }}>
-          <Image width="300" height="75" alt="icon" src="/icon.svg" />
+          <Image width="300" height="75" src={AppLogo} />
         </Box>
         <Box maxWidth={480} sx={{ width: 1 }}>
           <TextField

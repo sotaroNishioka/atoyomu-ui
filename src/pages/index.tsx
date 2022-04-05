@@ -1,8 +1,8 @@
 import { Card, Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import React from 'react'
-import Auth from '../components/Auth'
-import Header from '../components/Header'
+import Auth from '../components/functional/Auth'
+import Header from '../components/ui-parts/Header'
 
 const Index: NextPage = () => (
   // const auth = useAuth()

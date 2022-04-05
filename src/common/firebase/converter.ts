@@ -5,7 +5,7 @@ import {
   QueryDocumentSnapshot,
   SnapshotOptions
 } from 'firebase/firestore'
-import { TemporarilyRegister } from '../type/db'
+import { TemporarilyRegister } from '../types/db'
 
 /**
  * fireStoreでtemporarilyRegisterを追加する場合のコンバータ
