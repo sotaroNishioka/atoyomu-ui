@@ -2,8 +2,8 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
-import IndexProvider from '../common/provider/IndexProvider'
-import MyThemeProvider from '../common/provider/MyThemeProvider'
+import IndexProvider from '../common/providers/IndexProvider'
+import MyThemeProvider from '../common/providers/MyThemeProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

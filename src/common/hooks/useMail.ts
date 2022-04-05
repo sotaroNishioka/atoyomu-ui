@@ -4,20 +4,16 @@ import {
   serverTimestamp,
   Timestamp
 } from 'firebase/firestore'
-import { registerMail } from '../static/texts/mail'
 import { temporarilyRegisterConverter } from '../firebase/converter'
 import { db } from '../firebase/firebaseInit'
+import { registerMail } from '../static/texts/mail'
+import { UseMail } from '../types/hooks/useMail'
 import { addTime } from '../util/uuid'
 
-const useMail = () => {
-  /**
-   * 仮登録時にメールを送信する処理
-   * 認証用IDを発行しDBに保存したあと、メール送信を行う
-   * @module sendSignUpMail
-   * @param {string} email - メールを送信する対象のアドレス
-   * @return {void}
-   */
+const useMail = (): UseMail => {
+  // 仮登録メール送信処理
   const sendSignUpMail = async (email: string) => {
+    // 仮登録テーブルに登録履歴を追加
     const { id: registerId } = await addDoc(
       collection(db, 'temporarilyRegister').withConverter(
         temporarilyRegisterConverter
@@ -29,6 +25,8 @@ const useMail = () => {
         updatedAt: serverTimestamp()
       }
     )
+    // firebaseのtriggerMailExtentionにメール送信内容を登録する
+    // SendGridからメールが送信される
     addDoc(collection(db, 'mail'), {
       to: [email],
       message: {
@@ -37,6 +35,7 @@ const useMail = () => {
       },
       registerId
     })
+    // ただしこれらはエラーは返さないので必ずvoidなundefinedを返す
   }
   return { sendSignUpMail }
 }

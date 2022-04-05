@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { MessageContext } from '../provider/MessageProvider'
+import { MessageContext } from '../providers/MessageProvider'
 
 const useDrawer = () => useContext(MessageContext)
 

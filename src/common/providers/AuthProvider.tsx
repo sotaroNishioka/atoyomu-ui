@@ -1,5 +1,7 @@
 import {
   createUserWithEmailAndPassword,
+  EmailAuthProvider,
+  fetchSignInMethodsForEmail,
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -9,7 +11,6 @@ import {
   User
 } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
-import { useRouter } from 'next/router'
 import React, { createContext, ReactElement, useMemo, useState } from 'react'
 import { temporarilyRegisterConverter } from '../firebase/converter'
 import firebaseApp, { db } from '../firebase/firebaseInit'
@@ -21,18 +22,7 @@ import {
   INVALID_TEMPORALY_REGISTER,
   SIGNUP_UNEXPECTED_ERROR
 } from '../static/texts/message'
-
-type AuthContextType = {
-  user: User | null | undefined
-  isLogin: boolean
-  isEmailVerified: boolean
-  temporarilyRegister: (email: string) => void
-  googleLogin: () => void
-  logOut: () => void
-  getEmailByRegisterId: (id: string | undefined | string[]) => Promise<string>
-  signUpWithEmail: (email: string, password: string) => Promise<void>
-  signInWithEmail: (email: string, password: string) => Promise<void>
-}
+import { AuthContextType } from '../types/providers/AuthProviderType'
 
 export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
@@ -41,7 +31,7 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
   const auth = getAuth(firebaseApp)
 
   // hooks
-  const router = useRouter()
+  // const router = useRouter()
   const mail = useMail()
   const message = useMessage()
 
@@ -63,8 +53,7 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
 
   // function
   const temporarilyRegister = async (email: string) => {
-    mail.sendSignUpMail(email)
-    router.push('/sendmail')
+    await mail.sendSignUpMail(email)
   }
 
   const googleLogin = () => {
@@ -126,6 +115,17 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
     }
   }
 
+  const getIsEmailUserExsits = async (email: string): Promise<boolean> => {
+    const result = await fetchSignInMethodsForEmail(auth, email)
+    if (
+      result[0] === EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD ||
+      result[0] === EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
+    ) {
+      return true
+    }
+    return false
+  }
+
   const val = useMemo(
     () => ({
       user: currentUser,
@@ -136,7 +136,8 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
       logOut,
       getEmailByRegisterId,
       signUpWithEmail,
-      signInWithEmail
+      signInWithEmail,
+      getIsEmailUserExsits
     }),
     [currentUser]
   )

@@ -52,10 +52,16 @@ const SignUp: NextPage = () => {
       setEmailError('メールアドレスを入力してください。')
       error = true
     }
+    const isEmailExsits = await auth.getIsEmailUserExsits(email)
+    if (isEmailExsits === true) {
+      setEmailError('このメールアドレスは既に登録されています')
+      error = true
+    }
     if (error) {
       return
     }
     await auth.temporarilyRegister(email)
+    router.push('/sendmail')
   }
 
   return (
