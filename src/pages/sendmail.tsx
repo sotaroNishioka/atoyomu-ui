@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import useAuth from '../common/hooks/useAuth'
-import { AppLogo, AppLogo, SendMail } from '../common/static/images'
+import { AppLogo, SendMail } from '../common/static/images'
 
 const SignUp: NextPage = () => {
   const auth = useAuth()
