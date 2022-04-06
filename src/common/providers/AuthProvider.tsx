@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  TwitterAuthProvider,
   User
 } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
@@ -51,12 +52,20 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
   })
 
   // function
-  const temporarilyRegister = async (email: string) => {
+  const createTemporarilyRegister = async (email: string) => {
     await mail.sendSignUpMail(email)
   }
 
-  const googleLogin = () => {
-    signInWithPopup(auth, new GoogleAuthProvider())
+  const signUpWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider())
+    } catch (e: any) {
+      // popupの中断などでエラーがあっても何もしない
+    }
+  }
+
+  const signUpWithTwitter = () => {
+    signInWithPopup(auth, new TwitterAuthProvider())
   }
 
   const logOut = () => {
@@ -125,17 +134,22 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
     return false
   }
 
+  // const deleteUser = async () => {
+  //   await deleteUserGoogle(user)
+  // }
+
   const val = useMemo(
     () => ({
       user: currentUser,
       isLogin,
       isEmailVerified,
-      temporarilyRegister,
-      googleLogin,
-      logOut,
-      getEmailByRegisterId,
       signUpWithEmail,
+      signUpWithGoogle,
+      signUpWithTwitter,
       signInWithEmail,
+      logOut,
+      createTemporarilyRegister,
+      getEmailByRegisterId,
       getIsEmailUserExsits
     }),
     [currentUser]

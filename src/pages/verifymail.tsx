@@ -84,7 +84,7 @@ const SignUp: NextPage = () => {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => auth.temporarilyRegister(email)}
+            onClick={() => auth.createTemporarilyRegister(email)}
           >
             新規登録
           </Button>

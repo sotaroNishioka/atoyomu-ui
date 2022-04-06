@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Facebook, Twitter } from '@mui/icons-material'
+import { Twitter } from '@mui/icons-material'
 import GoogleIcon from '@mui/icons-material/Google'
 import {
   Box,
@@ -60,7 +60,7 @@ const SignUp: NextPage = () => {
     if (error) {
       return
     }
-    await auth.temporarilyRegister(email)
+    await auth.createTemporarilyRegister(email)
     router.push('/sendmail')
   }
 
@@ -134,10 +134,11 @@ const SignUp: NextPage = () => {
               }
             }}
             startIcon={<GoogleIcon />}
+            onClick={auth.signUpWithGoogle}
           >
             Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
           </Button>
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -153,7 +154,7 @@ const SignUp: NextPage = () => {
             startIcon={<Facebook />}
           >
             Facebook&nbsp;アカウントで登録
-          </Button>
+          </Button> */}
           <Button
             type="submit"
             fullWidth
@@ -168,6 +169,7 @@ const SignUp: NextPage = () => {
               }
             }}
             startIcon={<Twitter />}
+            onClick={auth.signUpWithTwitter}
           >
             Twitter&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
           </Button>
