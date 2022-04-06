@@ -5,22 +5,16 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import useAuth from '../common/hooks/useAuth'
-import { AppLogo, SendMail } from '../common/static/images'
+import { AppLogo, SendMail as SendMailImage } from '../common/static/images'
 
-const SignUp: NextPage = () => {
+const SendMail: NextPage = () => {
   const auth = useAuth()
   const router = useRouter()
 
-  //   const [email, setEmail] = useState<string>('')
-  // const [password, setPassword] = useState<string>('')
-
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (auth.isLogin && auth.isEmailVerified) {
+    if (auth.isLogin) {
       router.push('/home')
-    }
-    if (auth.isLogin && !auth.isEmailVerified) {
-      router.push('/verifyemail')
     }
   }, [auth.isLogin])
 
@@ -38,7 +32,7 @@ const SignUp: NextPage = () => {
           <Image width="240" height="60" alt="icon" src={AppLogo} />
         </Box>
         <Box>
-          <Image width="240" height="240" alt="sendmail" src={SendMail} />
+          <Image width="240" height="240" alt="sendmail" src={SendMailImage} />
         </Box>
         <Box>
           <Typography
@@ -65,4 +59,4 @@ const SignUp: NextPage = () => {
   )
 }
 
-export default SignUp
+export default SendMail

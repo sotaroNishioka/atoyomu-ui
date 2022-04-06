@@ -31,7 +31,6 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
   const auth = getAuth(firebaseApp)
 
   // hooks
-  // const router = useRouter()
   const mail = useMail()
   const message = useMessage()
 

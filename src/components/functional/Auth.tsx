@@ -10,8 +10,7 @@ const Auth = ({ children }: { children: ReactElement<any, any> }) => {
     if (
       router.pathname === '/' ||
       router.pathname === '/login' ||
-      router.pathname === '/signup' ||
-      router.pathname === '/verifyemail'
+      router.pathname === '/signup'
     )
       return
     if (user.isLogin === false) {
