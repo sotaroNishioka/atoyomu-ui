@@ -5,7 +5,7 @@ import {
   Timestamp
 } from 'firebase/firestore'
 import { temporarilyRegisterConverter } from '../firebase/converter'
-import { db } from '../firebase/firebaseInit'
+import { db } from '../firebase/firebaseApp'
 import { registerMail } from '../static/texts/mail'
 import { UseMail } from '../types/hooks/useMail'
 import { addTime } from '../util/uuid'

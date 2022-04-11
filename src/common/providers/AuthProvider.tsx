@@ -8,13 +8,12 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  TwitterAuthProvider,
   User
 } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import React, { createContext, ReactElement, useMemo, useState } from 'react'
 import { temporarilyRegisterConverter } from '../firebase/converter'
-import firebaseApp, { db } from '../firebase/firebaseInit'
+import { db, firebaseApp } from '../firebase/firebaseApp'
 import useMail from '../hooks/useMail'
 import useMessage from '../hooks/useMessage'
 import {
@@ -58,14 +57,16 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
 
   const signUpWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, new GoogleAuthProvider())
+      const { user } = await signInWithPopup(auth, new GoogleAuthProvider())
+      const { displayName, email, photoURL, uid } = user
     } catch (e: any) {
       // popupの中断などでエラーがあっても何もしない
     }
   }
 
+  // ユーザー認証が必要なのでペンディング
   const signUpWithTwitter = () => {
-    signInWithPopup(auth, new TwitterAuthProvider())
+    // signInWithPopup(auth, new TwitterAuthProvider())
   }
 
   const logOut = () => {
@@ -133,10 +134,6 @@ const AuthProvider = ({ children }: { children: ReactElement<any, any> }) => {
     }
     return false
   }
-
-  // const deleteUser = async () => {
-  //   await deleteUserGoogle(user)
-  // }
 
   const val = useMemo(
     () => ({

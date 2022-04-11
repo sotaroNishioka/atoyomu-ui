@@ -11,10 +11,8 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 }
 
-const firebase: FirebaseApp = !getApps().length
+export const firebaseApp: FirebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp()
 
 export const db = getFirestore()
-
-export default firebase
