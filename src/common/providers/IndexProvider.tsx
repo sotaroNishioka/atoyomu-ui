@@ -1,13 +1,13 @@
 import { ReactElement } from 'react'
-import UserProvider from './AuthProvider'
 import DrawerProvider from './DrawerProvider'
+import LoadingProvider from './LoadingProvider'
 import MessageProvider from './MessageProvider'
 
 const IndexProvider = ({ children }: { children: ReactElement<any, any> }) => (
   <MessageProvider>
-    <DrawerProvider>
-      <UserProvider>{children}</UserProvider>
-    </DrawerProvider>
+    <LoadingProvider>
+      <DrawerProvider>{children}</DrawerProvider>
+    </LoadingProvider>
   </MessageProvider>
 )
 

@@ -5,17 +5,27 @@ import {
   signInWithPopup,
   User
 } from 'firebase/auth'
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+  Timestamp
+} from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { temporarilyRegisterConverter } from '../../../common/firebase/converter'
 import { db } from '../../../common/firebase/firebaseApp'
-import useMail from '../../../common/hooks/useMail'
+import useLoading from '../../../common/hooks/useLoading'
+import { addTime } from '../../../common/util/uuid'
 import { isValidEmail } from '../../../common/util/validator'
+import { registerMail } from '../statics/texts/mail'
 
 const useSignUp = () => {
   const auth = getAuth()
-  const mail = useMail()
   const router = useRouter()
+  const loading = useLoading()
 
   const [email, setEmail] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
@@ -55,11 +65,7 @@ const useSignUp = () => {
     alert('Twitterログインは実装中')
   }
 
-  const createTemporarilyRegister = async (emailArg: string) => {
-    await mail.sendSignUpMail(emailArg)
-  }
-
-  const onSubmitEmailSignup = async () => {
+  const validateEmail = async (): Promise<boolean> => {
     let error = false
     setEmailError('')
     if (isValidEmail(email) === false) {
@@ -71,7 +77,7 @@ const useSignUp = () => {
       error = true
     }
     if (error) {
-      return
+      return false
     }
     const isEmailExsits = await getIsEmailUserExsits(email)
     if (isEmailExsits === true) {
@@ -79,10 +85,40 @@ const useSignUp = () => {
       error = true
     }
     if (error) {
+      return false
+    }
+    return true
+  }
+
+  const onSubmitEmailSignup = async () => {
+    loading.startLoading()
+    if ((await validateEmail()) === false) {
+      loading.finishLoading()
       return
     }
-    await createTemporarilyRegister(email)
+    const { id: registerId } = await addDoc(
+      collection(db, 'temporarilyRegister').withConverter(
+        temporarilyRegisterConverter
+      ),
+      {
+        email,
+        isEnabled: true,
+        expiredAt: Timestamp.fromDate(addTime({ date: new Date(), hour: 1 })),
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp()
+      }
+    )
+
+    await addDoc(collection(db, 'mail'), {
+      to: [email],
+      message: {
+        subject: '【ATOYOMU】仮登録完了のお知らせ',
+        text: registerMail(email, registerId)
+      },
+      type: 'temporarilyRegister'
+    })
     router.push('/sendmail')
+    loading.finishLoading()
   }
 
   return {

@@ -14,14 +14,12 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import useAuth from '../common/hooks/useAuth'
 import useKeyboard from '../common/hooks/useKeyboard'
 import { AppLogo } from '../common/static/images'
 import { isValidEmail, isValidPassword } from '../common/util/validator'
 
 const Login: NextPage = () => {
   // hooks
-  const auth = useAuth()
   const router = useRouter()
   const keyBoard = useKeyboard()
 

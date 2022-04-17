@@ -1,13 +1,11 @@
 /* eslint-disable react/button-has-type */
-import { Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import type { NextPage } from 'next'
-import useAuth from '../common/hooks/useAuth'
 import Auth from '../components/functional/Auth'
 import Header from '../components/ui-parts/Header'
+import { LogOutButton } from '../features/Auth'
 
 const Home: NextPage = () => {
-  const auth = useAuth()
-
   return (
     <Auth>
       <div>
@@ -21,7 +19,7 @@ const Home: NextPage = () => {
           style={{ minHeight: '200vh' }}
         >
           <Grid item xs={6}>
-            <Button onClick={auth.logOut}>ろぐあうと</Button>
+            <LogOutButton />
           </Grid>
         </Grid>
       </div>

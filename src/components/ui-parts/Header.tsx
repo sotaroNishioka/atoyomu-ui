@@ -2,10 +2,10 @@ import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
+import { getAuth } from 'firebase/auth'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
-import useAuth from '../../common/hooks/useAuth'
 import useDrawer from '../../common/hooks/useDrawer'
 import useSize from '../../common/hooks/useSize'
 import { AppLogo } from '../../common/static/images'
@@ -14,10 +14,12 @@ import TextButton from '../ui-elements/TextButton'
 import Drawer from './Drawer'
 
 const Header = () => {
+  // init
+  const auth = getAuth()
+
   // state
 
   // context
-  const user = useAuth()
   const drawer = useDrawer()
   const router = useRouter()
   const { isMobileSize } = useSize()
@@ -84,7 +86,7 @@ const Header = () => {
         justifyContent="center"
       >
         <Toolbar style={{ maxWidth: 1200, width: '100%' }}>
-          {user.isLogin && (
+          {auth.currentUser !== null && (
             <IconButton
               size="large"
               edge="start"
@@ -103,7 +105,7 @@ const Header = () => {
             src={AppLogo}
           />
           <Box sx={{ flexGrow: 1 }} />
-          {user.isLogin ? loginUserMenu : unregisteredUserMenu}
+          {auth.currentUser !== null ? loginUserMenu : unregisteredUserMenu}
         </Toolbar>
       </Grid>
       <Drawer />

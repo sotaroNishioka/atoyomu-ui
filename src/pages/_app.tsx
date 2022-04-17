@@ -2,10 +2,14 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
+import { initFirebase } from '../common/firebase/firebaseApp'
 import IndexProvider from '../common/providers/IndexProvider'
 import MyThemeProvider from '../common/providers/MyThemeProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  // firebaseの初期化
+  initFirebase
+
   return (
     <>
       <Head>

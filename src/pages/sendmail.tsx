@@ -1,22 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Box, Container, Typography } from '@mui/material'
+import { getAuth } from 'firebase/auth'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import useAuth from '../common/hooks/useAuth'
 import { AppLogo, SendMail as SendMailImage } from '../common/static/images'
 
 const SendMail: NextPage = () => {
-  const auth = useAuth()
+  const auth = getAuth()
   const router = useRouter()
 
   // ログイン済みの場合は管理画面に遷移
   useEffect(() => {
-    if (auth.isLogin) {
+    if (auth.currentUser !== null) {
       router.push('/home')
     }
-  }, [auth.isLogin])
+  }, [auth.currentUser])
 
   return (
     <Container>
