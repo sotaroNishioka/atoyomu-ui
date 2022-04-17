@@ -6,7 +6,7 @@ import GoogleSignUpButton from './GoogleSignUpButton'
 import SignUpEmailTextField from './SignUpEmailTextField'
 import TwitterSignUpButton from './TwitterSignUpButton'
 
-const SignUpForm = () => {
+export const SignUpForm = () => {
   const {
     email,
     emailError,
@@ -38,5 +38,3 @@ const SignUpForm = () => {
     </Box>
   )
 }
-
-export default SignUpForm
