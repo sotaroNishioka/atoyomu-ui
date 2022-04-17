@@ -4,7 +4,8 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import React from 'react'
 import { AppLogo } from '../common/static/images'
-import { SignUpForm } from '../features/Auth'
+import SignUpForm from '../features/Auth/components/signUp/SignUpForm'
+// import { SignUpForm } from '../features/Auth'
 
 const SignUp: NextPage = () => (
   <Container>
