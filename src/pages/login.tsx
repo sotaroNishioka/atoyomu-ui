@@ -71,9 +71,10 @@ const Login: NextPage = () => {
       setPasswordError('パスワードを入力してください。')
       error = true
     }
-    if (error) {
-      return
-    }
+    console.log(error)
+    // if (error) {
+    //   return
+    // }
     // await auth.signInWithEmail(email, password)
   }
 
