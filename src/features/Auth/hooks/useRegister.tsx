@@ -26,41 +26,6 @@ const useRegister = () => {
   const [password2, setPassword2] = useState<string>('')
   const [isValidInput, setIsValidInput] = useState<boolean>(false)
 
-  // ログイン済みの場合は管理画面に遷移
-  useEffect(() => {
-    if (auth.currentUser !== null) {
-      router.push('/home')
-    }
-  }, [auth.currentUser])
-
-  // next-routerが準備可能な場合にURLQueryからメールアドレスを取得する
-  useEffect(() => {
-    const f = async () => {
-      if (router.isReady) {
-        try {
-          if (typeof router.query.id === 'string') {
-            await getEmailByRegisterId(router.query.id)
-            setRegisterId(router.query.id)
-            return
-          }
-          throw new Error()
-        } catch (e) {
-          message.showMessage(INVALID_TEMPORALY_REGISTER)
-        }
-      }
-    }
-    f()
-  }, [router.isReady])
-
-  // 入力内容がすべて正しい場合は決定ボタンを押下可能にする
-  useEffect(() => {
-    setIsValidInput(
-      isValidEmail(email) &&
-        isValidPassword(password1) &&
-        password1 === password2
-    )
-  }, [password1, password2, email])
-
   const getEmailByRegisterId = async (
     id: string | undefined | string[]
   ): Promise<void> => {
@@ -125,6 +90,41 @@ const useRegister = () => {
       loading.finishLoading()
     }
   }
+
+  // next-routerが準備可能な場合にURLQueryからメールアドレスを取得する
+  useEffect(() => {
+    const f = async () => {
+      if (router.isReady) {
+        try {
+          if (typeof router.query.id === 'string') {
+            await getEmailByRegisterId(router.query.id)
+            setRegisterId(router.query.id)
+            return
+          }
+          throw new Error()
+        } catch (e) {
+          message.showMessage(INVALID_TEMPORALY_REGISTER)
+        }
+      }
+    }
+    f()
+  }, [router.isReady])
+
+  // ログイン済みの場合は管理画面に遷移
+  useEffect(() => {
+    if (auth.currentUser !== null) {
+      router.push('/home')
+    }
+  }, [auth.currentUser])
+
+  // 入力内容がすべて正しい場合は決定ボタンを押下可能にする
+  useEffect(() => {
+    setIsValidInput(
+      isValidEmail(email) &&
+        isValidPassword(password1) &&
+        password1 === password2
+    )
+  }, [password1, password2, email])
 
   return {
     email,
