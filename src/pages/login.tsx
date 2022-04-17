@@ -10,6 +10,7 @@ import {
   Link,
   TextField
 } from '@mui/material'
+import { getAuth } from 'firebase/auth'
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -22,6 +23,7 @@ const Login: NextPage = () => {
   // hooks
   const router = useRouter()
   const keyBoard = useKeyboard()
+  const auth = getAuth()
 
   // state
   const [email, setEmail] = useState<string>('')
@@ -31,10 +33,10 @@ const Login: NextPage = () => {
 
   // effect
   useEffect(() => {
-    if (auth.isLogin) {
+    if (auth.currentUser !== null) {
       router.push('/home')
     }
-  }, [auth.isLogin])
+  }, [auth.currentUser])
 
   // functions
 
@@ -72,7 +74,7 @@ const Login: NextPage = () => {
     if (error) {
       return
     }
-    await auth.signInWithEmail(email, password)
+    // await auth.signInWithEmail(email, password)
   }
 
   return (
