@@ -2,7 +2,7 @@
 import { Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import Header from '../components/ui-parts/Header'
-import { LogOutButton } from '../features/Auth/test'
+import { LogOutButton } from '../features/Auth'
 
 const Home: NextPage = () => (
   <div>
