@@ -2,7 +2,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import { Button } from '@mui/material'
 import useLogout from '../../hooks/useLogOut'
 
-export const LogOutButton: React.FC = () => {
+const LogOutButton: React.FC = () => {
   const logOut = useLogout()
   return (
     <Button
@@ -17,3 +17,5 @@ export const LogOutButton: React.FC = () => {
     </Button>
   )
 }
+
+export default LogOutButton

@@ -1,3 +1,5 @@
-export * from './components/logOut/LogOutButton'
-export * from './components/register/RegisterForm'
-export * from './components/signUp/SignUpForm'
+import LogOutButton from './components/logOut/LogOutButton'
+import RegisterForm from './components/register/RegisterForm'
+import SignUpForm from './components/signUp/SignUpForm'
+
+export { LogOutButton, RegisterForm, SignUpForm }

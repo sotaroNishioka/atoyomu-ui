@@ -12,7 +12,7 @@ import useLoading from '../../../../common/hooks/useLoading'
 import { isValidPassword } from '../../../../common/util/validator'
 import useRegister from '../../hooks/useRegister'
 
-export const RegisterForm: NextPage = () => {
+const RegisterForm: NextPage = () => {
   const register = useRegister()
   const loading = useLoading()
 
@@ -102,3 +102,5 @@ export const RegisterForm: NextPage = () => {
     </Box>
   )
 }
+
+export default RegisterForm
