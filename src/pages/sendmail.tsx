@@ -5,7 +5,8 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { AppLogo, SendMail as SendMailImage } from '../common/static/images'
+import { AppLogo } from '../common/static/images'
+import { SendMail as SendMailImage } from '../features/Auth/statics/images'
 
 const SendMail: NextPage = () => {
   const auth = getAuth()
