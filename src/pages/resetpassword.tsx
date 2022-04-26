@@ -4,9 +4,9 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import React from 'react'
 import { AppLogo } from '../common/static/images'
-import { LoginForm } from '../features/Auth'
+import { ResetPasswordForm } from '../features/Auth'
 
-const Login: NextPage = () => (
+const ResetPassword: NextPage = () => (
   <Container>
     <Box
       sx={{
@@ -20,9 +20,9 @@ const Login: NextPage = () => (
       <Box sx={{ mb: 4 }}>
         <Image width="300" height="75" src={AppLogo} />
       </Box>
-      <LoginForm />
+      <ResetPasswordForm />
     </Box>
   </Container>
 )
 
-export default Login
+export default ResetPassword

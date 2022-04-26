@@ -26,3 +26,9 @@ export const INVALID_LOGIN_DATA = {
   type: 'error',
   message: 'ログインに失敗しました。時間をおいて再度お試しください。'
 }
+
+export const FAILED_RESET_PASSWORD = {
+  type: 'error',
+  message:
+    'パスワードのリセットに失敗しました。時間をおいて再度お試しください。'
+}

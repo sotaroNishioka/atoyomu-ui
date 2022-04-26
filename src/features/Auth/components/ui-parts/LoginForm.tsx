@@ -58,7 +58,7 @@ export const LoginForm = () => {
       <EmailButton onClick={loginWithEmail} text="ログイン" />
       <Grid container justifyContent="center">
         <Grid item>
-          <Link href="#" variant="body2">
+          <Link href="/resetpassword" variant="body2">
             パスワードをお忘れの方はこちら
           </Link>
         </Grid>
