@@ -29,8 +29,8 @@ const SendMail: NextPage = () => {
           alignItems: 'center'
         }}
       >
-        <Box>
-          <Image width="240" height="60" alt="icon" src={AppLogo} />
+        <Box sx={{ mb: 4 }}>
+          <Image width="300" height="75" alt="icon" src={AppLogo} />
         </Box>
         <Box>
           <Image width="240" height="240" alt="sendmail" src={SendMailImage} />

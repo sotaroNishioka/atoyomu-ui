@@ -2,7 +2,7 @@ import { Email } from '@mui/icons-material'
 import { Button } from '@mui/material'
 import useLoading from '../../../../common/hooks/useLoading'
 
-const EmailSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
+const EmailButton: React.FC<{ onClick: () => Promise<void> }> = ({
   onClick
 }) => {
   const loading = useLoading()
@@ -21,4 +21,4 @@ const EmailSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
   )
 }
 
-export default EmailSignUpButton
+export default EmailButton

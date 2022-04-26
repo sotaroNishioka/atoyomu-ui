@@ -1,3 +1,3 @@
-export * from './components/logOut/LogOutButton'
-export * from './components/register/RegisterForm'
-export * from './components/signUp/SignUpForm'
+export * from './components/ui-elements/LogOutButton'
+export * from './components/ui-parts/RegisterForm'
+export * from './components/ui-parts/SignUpForm'

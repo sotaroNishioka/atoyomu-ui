@@ -37,6 +37,7 @@ const useSignUp = () => {
       photoURL: user.photoURL,
       providerId: user.providerId,
       providerData: user.providerData,
+      lastLoginedAt: serverTimestamp(),
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     })

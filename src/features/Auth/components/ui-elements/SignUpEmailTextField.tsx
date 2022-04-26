@@ -1,7 +1,7 @@
 import { Box, FormHelperText, TextField } from '@mui/material'
 import useKeyboard from '../../../../common/hooks/useKeyboard'
 
-const SignUpEmailTextField: React.FC<{
+const SignUpTextField: React.FC<{
   email: string
   emailError: string
   onChange: (arg: string) => void
@@ -30,4 +30,4 @@ const SignUpEmailTextField: React.FC<{
   )
 }
 
-export default SignUpEmailTextField
+export default SignUpTextField
