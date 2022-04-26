@@ -97,7 +97,7 @@ export const RegisterForm: NextPage = () => {
         sx={{ mt: 3, mb: 2 }}
         disabled={!register.isValidInput || loading.isLoading}
       >
-        ログイン
+        登録
       </Button>
     </Box>
   )

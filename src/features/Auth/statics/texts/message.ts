@@ -21,3 +21,8 @@ export const SIGNUP_UNEXPECTED_ERROR = {
   message:
     'プロフィール登録に失敗しました。画面をリロードして再度お試しください。'
 }
+
+export const INVALID_LOGIN_DATA = {
+  type: 'error',
+  message: 'ログインに失敗しました。時間をおいて再度お試しください。'
+}
