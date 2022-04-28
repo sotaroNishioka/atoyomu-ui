@@ -42,3 +42,8 @@ export const SIGNUP_UNEXPEECTED_ERROR = {
   type: 'error',
   message: '新規登録に失敗しました。画面をリロードして再度お試しください。'
 }
+
+export const USER_IS_NOT_EXIST = {
+  type: 'error',
+  message: 'このアカウント登録されていません。新規登録を行ってください。'
+}

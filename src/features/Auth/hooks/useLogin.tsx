@@ -1,4 +1,6 @@
 import {
+  deleteUser,
+  getAdditionalUserInfo,
   getAuth,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -11,7 +13,7 @@ import { db } from '../../../common/firebase/firebaseApp'
 import useLoading from '../../../common/hooks/useLoading'
 import useMessage from '../../../common/hooks/useMessage'
 import { isValidEmail, isValidPassword } from '../../../common/util/validator'
-import { INVALID_LOGIN_DATA } from '../statics/texts/message'
+import { INVALID_LOGIN_DATA, USER_IS_NOT_EXIST } from '../statics/texts/message'
 
 const useLogIn = () => {
   // hooks
@@ -80,14 +82,33 @@ const useLogIn = () => {
     loading.startLoading()
     const provider = new GoogleAuthProvider()
     try {
-      const { user } = await signInWithPopup(auth, provider)
+      const result = await signInWithPopup(auth, provider)
+      const additionalInfo = getAdditionalUserInfo(result)
+      if (additionalInfo === null) {
+        throw new Error('cannot_get_info')
+      }
+      const { isNewUser } = additionalInfo
+      if (isNewUser === true) {
+        if (auth.currentUser !== null) {
+          await deleteUser(auth.currentUser)
+        }
+        throw new Error('is_not_existing_user')
+      }
+      const { user } = result
       await updateDoc(doc(db, 'users', user.uid), {
         lastLoginedAt: serverTimestamp()
       })
       await router.push('/home')
-    } catch (e) {
+    } catch (e: any) {
+      if (e.message === 'cannot_get_info') {
+        message.showMessage(INVALID_LOGIN_DATA)
+        return
+      }
+      if (e.message === 'is_not_existing_user') {
+        message.showMessage(USER_IS_NOT_EXIST)
+        return
+      }
       message.showMessage(INVALID_LOGIN_DATA)
-      return
     } finally {
       loading.finishLoading()
     }
