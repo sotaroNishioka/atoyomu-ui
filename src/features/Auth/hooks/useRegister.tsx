@@ -11,7 +11,7 @@ import {
   EMAIL_ALREADY_IN_USE,
   EXPIRED_TEMPORALY_REGISTER,
   INVALID_TEMPORALY_REGISTER,
-  SIGNUP_UNEXPECTED_ERROR
+  REGISTER_UNEXPECTED_ERROR
 } from '../statics/texts/message'
 
 const useRegister = () => {
@@ -85,7 +85,7 @@ const useRegister = () => {
         message.showMessage(EMAIL_ALREADY_IN_USE)
         return
       }
-      message.showMessage(SIGNUP_UNEXPECTED_ERROR)
+      message.showMessage(REGISTER_UNEXPECTED_ERROR)
     } finally {
       loading.finishLoading()
     }
