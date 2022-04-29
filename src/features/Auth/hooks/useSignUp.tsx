@@ -115,7 +115,8 @@ const useSignUp = () => {
         subject: '【ATOYOMU】仮登録完了のお知らせ',
         text: registerMail(email, registerId)
       },
-      type: 'temporarilyRegister'
+      type: 'temporarilyRegister',
+      createdAt: serverTimestamp()
     })
     router.push('/sendmail')
     loading.finishLoading()

@@ -59,7 +59,6 @@ const useRegister = () => {
         email,
         password1
       )
-
       await Promise.all([
         setDoc(doc(db, 'users', user.uid), {
           uid: user.uid,
