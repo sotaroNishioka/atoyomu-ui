@@ -133,6 +133,7 @@ const useSignUp = () => {
 
     await addDoc(collection(db, 'mail'), {
       to: [email],
+      from: `ATOYOMU <noreply@atoyomu.devdev.app>`,
       message: {
         subject: '【ATOYOMU】仮登録完了のお知らせ',
         text: registerMail(email, registerId)
