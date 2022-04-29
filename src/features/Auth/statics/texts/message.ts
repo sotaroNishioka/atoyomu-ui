@@ -16,8 +16,34 @@ export const EMAIL_ALREADY_IN_USE = {
     'このメールアドレスは既に登録されています。ログインを行うか、別のメールアドレスをお試しください。'
 }
 
-export const SIGNUP_UNEXPECTED_ERROR = {
+export const REGISTER_UNEXPECTED_ERROR = {
   type: 'error',
   message:
     'プロフィール登録に失敗しました。画面をリロードして再度お試しください。'
+}
+
+export const INVALID_LOGIN_DATA = {
+  type: 'error',
+  message: 'ログインに失敗しました。時間をおいて再度お試しください。'
+}
+
+export const FAILED_RESET_PASSWORD = {
+  type: 'error',
+  message:
+    'パスワードのリセットに失敗しました。時間をおいて再度お試しください。'
+}
+
+export const IS_NOT_NEW_USER = {
+  type: 'error',
+  message: 'このアカウントは既に登録されています。ログインを行ってください。'
+}
+
+export const SIGNUP_UNEXPEECTED_ERROR = {
+  type: 'error',
+  message: '新規登録に失敗しました。画面をリロードして再度お試しください。'
+}
+
+export const USER_IS_NOT_EXIST = {
+  type: 'error',
+  message: 'このアカウント登録されていません。新規登録を行ってください。'
 }

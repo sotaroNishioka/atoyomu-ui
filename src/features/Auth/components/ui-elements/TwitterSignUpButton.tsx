@@ -1,7 +1,7 @@
 import { Twitter } from '@mui/icons-material'
 import { Button } from '@mui/material'
 
-const TwitterSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
+const TwitterButton: React.FC<{ onClick: () => Promise<void> }> = ({
   onClick
 }) => (
   <Button
@@ -24,4 +24,4 @@ const TwitterSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
   </Button>
 )
 
-export default TwitterSignUpButton
+export default TwitterButton

@@ -1,5 +1,6 @@
 import {
   fetchSignInMethodsForEmail,
+  getAdditionalUserInfo,
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
@@ -18,14 +19,20 @@ import { useState } from 'react'
 import { temporarilyRegisterConverter } from '../../../common/firebase/converter'
 import { db } from '../../../common/firebase/firebaseApp'
 import useLoading from '../../../common/hooks/useLoading'
+import useMessage from '../../../common/hooks/useMessage'
 import { addTime } from '../../../common/util/uuid'
 import { isValidEmail } from '../../../common/util/validator'
 import { registerMail } from '../statics/texts/mail'
+import {
+  IS_NOT_NEW_USER,
+  SIGNUP_UNEXPEECTED_ERROR
+} from '../statics/texts/message'
 
 const useSignUp = () => {
   const auth = getAuth()
   const router = useRouter()
   const loading = useLoading()
+  const message = useMessage()
 
   const [email, setEmail] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
@@ -37,6 +44,7 @@ const useSignUp = () => {
       photoURL: user.photoURL,
       providerId: user.providerId,
       providerData: user.providerData,
+      lastLoginedAt: serverTimestamp(),
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     })
@@ -52,10 +60,24 @@ const useSignUp = () => {
 
   const signUpWithGoogle = async () => {
     try {
-      const { user } = await signInWithPopup(auth, new GoogleAuthProvider())
-      await createUsersData(user)
+      const result = await signInWithPopup(auth, new GoogleAuthProvider())
+      const additionalInfo = getAdditionalUserInfo(result)
+      if (additionalInfo === null) {
+        await auth.signOut()
+        throw new Error('cannot_get_info')
+      }
+      const { isNewUser } = additionalInfo
+      if (isNewUser === false) {
+        await auth.signOut()
+        throw new Error('not_new_user')
+      }
+      await createUsersData(result.user)
     } catch (e: any) {
-      // popupの中断などでエラーがあっても何もしない
+      if (e.message === 'not_new_user') {
+        message.showMessage(IS_NOT_NEW_USER)
+        return
+      }
+      message.showMessage(SIGNUP_UNEXPEECTED_ERROR)
     }
   }
 

@@ -1,7 +1,7 @@
 import { Facebook } from '@mui/icons-material'
 import { Button } from '@mui/material'
 
-const FacebookSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
+const FacebookButton: React.FC<{ onClick: () => Promise<void> }> = ({
   onClick
 }) => (
   <Button
@@ -24,4 +24,4 @@ const FacebookSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
   </Button>
 )
 
-export default FacebookSignUpButton
+export default FacebookButton

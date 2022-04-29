@@ -1,9 +1,10 @@
 import Google from '@mui/icons-material/Google'
 import { Button } from '@mui/material'
 
-const GoogleSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
-  onClick
-}) => (
+const GoogleButton: React.FC<{
+  onClick: () => Promise<void>
+  text: string
+}> = ({ onClick, text }) => (
   <Button
     type="submit"
     fullWidth
@@ -20,8 +21,8 @@ const GoogleSignUpButton: React.FC<{ onClick: () => Promise<void> }> = ({
     onClick={onClick}
     startIcon={<Google />}
   >
-    Google&nbsp;&nbsp;&nbsp;&nbsp;アカウントで登録
+    {text}
   </Button>
 )
 
-export default GoogleSignUpButton
+export default GoogleButton

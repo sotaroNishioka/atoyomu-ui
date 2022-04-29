@@ -1,10 +1,8 @@
 import { Box, Grid, Link } from '@mui/material'
 import useSignUp from '../../hooks/useSignUp'
-import EmailSignUpButton from './EmailSignUpButton'
-import FacebookSignUpButton from './FacebookSignUpButton'
-import GoogleSignUpButton from './GoogleSignUpButton'
-import SignUpEmailTextField from './SignUpEmailTextField'
-import TwitterSignUpButton from './TwitterSignUpButton'
+import EmailButton from '../ui-elements/EmailButton'
+import GoogleSignUpButton from '../ui-elements/GoogleButton'
+import SignUpEmailTextField from '../ui-elements/SignUpEmailTextField'
 
 export const SignUpForm = () => {
   const {
@@ -12,7 +10,7 @@ export const SignUpForm = () => {
     emailError,
     setEmail,
     signUpWithGoogle,
-    signUpWithTwitter,
+    // signUpWithTwitter,
     onSubmitEmailSignup
   } = useSignUp()
 
@@ -31,10 +29,13 @@ export const SignUpForm = () => {
           </Link>
         </Grid>
       </Grid>
-      <EmailSignUpButton onClick={onSubmitEmailSignup} />
-      <GoogleSignUpButton onClick={signUpWithGoogle} />
-      <FacebookSignUpButton onClick={signUpWithTwitter} />
-      <TwitterSignUpButton onClick={signUpWithTwitter} />
+      <EmailButton onClick={onSubmitEmailSignup} text="新規登録" />
+      <GoogleSignUpButton
+        onClick={signUpWithGoogle}
+        text="Googleアカウントで登録"
+      />
+      {/* <FacebookSignUpButton onClick={signUpWithTwitter} />
+      <TwitterSignUpButton onClick={signUpWithTwitter} /> */}
     </Box>
   )
 }
