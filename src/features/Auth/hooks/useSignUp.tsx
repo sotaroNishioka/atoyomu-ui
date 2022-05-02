@@ -151,7 +151,8 @@ const useSignUp = () => {
     setEmail,
     signUpWithGoogle,
     signUpWithTwitter,
-    onSubmitEmailSignup
+    onSubmitEmailSignup,
+    getIsEmailUserExsits
   }
 }
 

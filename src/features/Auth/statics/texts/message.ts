@@ -27,6 +27,11 @@ export const INVALID_LOGIN_DATA = {
   message: 'ログインに失敗しました。時間をおいて再度お試しください。'
 }
 
+export const RESET_PASSWORD_EMAIL_IS_NOT_EXSITS = {
+  type: 'error',
+  message: 'このメールアドレスは登録されていません。'
+}
+
 export const FAILED_RESET_PASSWORD = {
   type: 'error',
   message:

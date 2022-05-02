@@ -6,7 +6,11 @@ import useKeyboard from '../../../../common/hooks/useKeyboard'
 import useLoading from '../../../../common/hooks/useLoading'
 import useMessage from '../../../../common/hooks/useMessage'
 import { isValidEmail } from '../../../../common/util/validator'
-import { FAILED_RESET_PASSWORD } from '../../statics/texts/message'
+import useSignUp from '../../hooks/useSignUp'
+import {
+  FAILED_RESET_PASSWORD,
+  RESET_PASSWORD_EMAIL_IS_NOT_EXSITS
+} from '../../statics/texts/message'
 import EmailButton from '../ui-elements/EmailButton'
 
 export const ResetPasswordForm = () => {
@@ -15,6 +19,7 @@ export const ResetPasswordForm = () => {
   const message = useMessage()
   const keyBoard = useKeyboard()
   const router = useRouter()
+  const { getIsEmailUserExsits } = useSignUp()
   const [email, setEmail] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
 
@@ -41,10 +46,16 @@ export const ResetPasswordForm = () => {
       loading.finishLoading()
       return
     }
+    const isExsitsMail = await getIsEmailUserExsits(email)
+    if (isExsitsMail === false) {
+      message.showMessage(RESET_PASSWORD_EMAIL_IS_NOT_EXSITS)
+      loading.finishLoading()
+      return
+    }
     try {
       await sendPasswordResetEmail(auth, email)
       router.push('/sendmail')
-    } catch (e) {
+    } catch (e: any) {
       message.showMessage(FAILED_RESET_PASSWORD)
     } finally {
       loading.finishLoading()
