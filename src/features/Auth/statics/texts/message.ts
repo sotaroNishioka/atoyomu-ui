@@ -52,3 +52,9 @@ export const USER_IS_NOT_EXIST = {
   type: 'error',
   message: 'このアカウント登録されていません。新規登録を行ってください。'
 }
+
+export const RESET_PASSWORD_INVALID_URL = {
+  type: 'error',
+  message:
+    'ご登録いただいた内容を確認できませんでした。画面をリロードして再度お試しください。'
+}

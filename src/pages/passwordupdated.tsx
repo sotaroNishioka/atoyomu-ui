@@ -3,10 +3,10 @@ import { Box, Container, Typography } from '@mui/material'
 import { getAuth } from 'firebase/auth'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { AppLogo } from '../common/static/images'
-import { SendMail as SendMailImage } from '../features/Auth/statics/images'
+import { AppLogo, Check } from '../common/static/images'
 
 const SendMail: NextPage = () => {
   const auth = getAuth()
@@ -33,7 +33,7 @@ const SendMail: NextPage = () => {
           <Image width="300" height="75" alt="icon" src={AppLogo} />
         </Box>
         <Box>
-          <Image width="240" height="240" alt="sendmail" src={SendMailImage} />
+          <Image width="240" height="240" alt="sendmail" src={Check} />
         </Box>
         <Box>
           <Typography
@@ -43,18 +43,28 @@ const SendMail: NextPage = () => {
             variant="h5"
             sx={{ mb: 1 }}
           >
-            Thank You!!
+            パスワードを更新しました
           </Typography>
           <Typography
             color="primary"
             align="center"
             variant="subtitle1"
             fontWeight="bold"
+            sx={{ mb: 2 }}
           >
-            ご登録いただいたメールアドレスに
-            <br />
-            メールを送信しましたのでご確認ください。
+            下記よりもう一度ログインを行ってください。
           </Typography>
+          <Link href="/login" passHref>
+            <Typography
+              color="primary"
+              align="center"
+              variant="h6"
+              fontWeight="bold"
+              sx={{ cursor: 'pointer' }}
+            >
+              ログインページへ
+            </Typography>
+          </Link>
         </Box>
       </Box>
     </Container>
