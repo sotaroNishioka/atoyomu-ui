@@ -1,4 +1,4 @@
-import { Box, Grid, Link } from '@mui/material'
+import { Box, Grid, Link, Typography } from '@mui/material'
 import useSignUp from '../../hooks/useSignUp'
 import EmailButton from '../ui-elements/EmailButton'
 import GoogleSignUpButton from '../ui-elements/GoogleButton'
@@ -16,6 +16,19 @@ export const SignUpForm = () => {
 
   return (
     <Box maxWidth={480} sx={{ width: 1 }}>
+      <Typography color="primary" fontWeight="bold" align="left" variant="h5">
+        新規登録
+      </Typography>
+      <Typography
+        color="primary"
+        align="left"
+        variant="subtitle1"
+        sx={{ mb: 4, mt: 2 }}
+      >
+        新しいアカウントを作成します。
+        <br />
+        ご利用になるメールアドレスを入力してください。
+      </Typography>
       <SignUpEmailTextField
         email={email}
         emailError={emailError}

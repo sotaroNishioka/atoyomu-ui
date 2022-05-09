@@ -1,4 +1,4 @@
-import { Box, FormHelperText, TextField } from '@mui/material'
+import { Box, FormHelperText, TextField, Typography } from '@mui/material'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -64,11 +64,19 @@ export const ResetPasswordForm = () => {
 
   return (
     <Box maxWidth={480} sx={{ width: 1 }}>
-      <FormHelperText sx={{ mb: 4 }}>
-        ご登録済みのメールアドレスを入力してください。
+      <Typography color="primary" fontWeight="bold" align="left" variant="h5">
+        パスワード再設定
+      </Typography>
+      <Typography
+        color="primary"
+        align="left"
+        variant="subtitle1"
+        sx={{ mb: 4, mt: 2 }}
+      >
+        パスワードを再設定します。
         <br />
-        ご指定のメールアドレスに、パスワードリセット用のURLをお送りします。
-      </FormHelperText>
+        ご登録済みのメールアドレスを入力してください。
+      </Typography>
       <TextField
         margin="dense"
         required

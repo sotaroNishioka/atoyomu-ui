@@ -38,11 +38,10 @@ const useAuthAction = () => {
     }
     const code = oobCode as string
     try {
-      confirmPasswordReset(auth, code, password1)
+      await confirmPasswordReset(auth, code, password1)
+      await applyActionCode(auth, code)
     } catch (e) {
       message.showMessage(RESET_PASSWORD_INVALID_URL)
-    } finally {
-      await applyActionCode(auth, code)
     }
   }
 

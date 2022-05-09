@@ -6,7 +6,7 @@ import React from 'react'
 import { AppLogo } from '../common/static/images'
 import { AuthActionForm } from '../features/Auth'
 
-const ResetPassword: NextPage = () => (
+const AuthAction: NextPage = () => (
   <Container>
     <Box
       sx={{
@@ -25,4 +25,4 @@ const ResetPassword: NextPage = () => (
   </Container>
 )
 
-export default ResetPassword
+export default AuthAction

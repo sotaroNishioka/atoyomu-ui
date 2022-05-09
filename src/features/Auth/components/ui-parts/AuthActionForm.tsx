@@ -24,9 +24,11 @@ export const AuthActionForm: NextPage = () => {
         color="primary"
         align="left"
         variant="subtitle1"
-        sx={{ mb: 5 }}
+        sx={{ mb: 4, mt: 2 }}
       >
         パスワードを再設定します。
+        <br />
+        新しいパスワードを入力してください。
       </Typography>
       <Typography color="primary" variant="subtitle1">
         パスワード
