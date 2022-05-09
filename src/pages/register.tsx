@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { AppLogo } from '../common/static/images'
+import UnAuthRoute from '../components/ui-parts/UnAuthRoute'
 import { RegisterForm } from '../features/Auth'
 
 const Register: NextPage = () => {
@@ -20,22 +21,24 @@ const Register: NextPage = () => {
   }, [auth.currentUser])
 
   return (
-    <Container>
-      <Box
-        sx={{
-          mt: 8,
-          mb: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}
-      >
-        <Box sx={{ mb: 4 }}>
-          <Image width="300" height="75" alt="icon" src={AppLogo} />
+    <UnAuthRoute>
+      <Container>
+        <Box
+          sx={{
+            mt: 8,
+            mb: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+        >
+          <Box sx={{ mb: 4 }}>
+            <Image width="300" height="75" alt="icon" src={AppLogo} />
+          </Box>
+          <RegisterForm />
         </Box>
-        <RegisterForm />
-      </Box>
-    </Container>
+      </Container>
+    </UnAuthRoute>
   )
 }
 

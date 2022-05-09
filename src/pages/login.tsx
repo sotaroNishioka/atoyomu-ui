@@ -4,25 +4,28 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import React from 'react'
 import { AppLogo } from '../common/static/images'
+import UnAuthRoute from '../components/ui-parts/UnAuthRoute'
 import { LoginForm } from '../features/Auth'
 
 const Login: NextPage = () => (
-  <Container>
-    <Box
-      sx={{
-        mt: 8,
-        mb: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-      }}
-    >
-      <Box sx={{ mb: 4 }}>
-        <Image width="300" height="75" src={AppLogo} />
+  <UnAuthRoute>
+    <Container>
+      <Box
+        sx={{
+          mt: 8,
+          mb: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
+        <Box sx={{ mb: 4 }}>
+          <Image width="300" height="75" src={AppLogo} />
+        </Box>
+        <LoginForm />
       </Box>
-      <LoginForm />
-    </Box>
-  </Container>
+    </Container>
+  </UnAuthRoute>
 )
 
 export default Login
