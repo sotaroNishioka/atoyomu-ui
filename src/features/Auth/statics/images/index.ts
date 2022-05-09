@@ -1,4 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import sendmail from './sendmail.svg'
+import check from './check.svg'
+import mail from './mail.svg'
 
-export const SendMail = sendmail
+export const Mail = mail
+export const Check = check

@@ -6,9 +6,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { AppLogo, Check } from '../common/static/images'
+import { AppLogo } from '../common/static/images'
+import { Check } from '../features/Auth/statics/images'
 
-const SendMail: NextPage = () => {
+const PasswordUpdated: NextPage = () => {
   const auth = getAuth()
   const router = useRouter()
 
@@ -33,7 +34,7 @@ const SendMail: NextPage = () => {
           <Image width="300" height="75" alt="icon" src={AppLogo} />
         </Box>
         <Box>
-          <Image width="240" height="240" alt="sendmail" src={Check} />
+          <Image width="240" height="240" alt="check" src={Check} />
         </Box>
         <Box>
           <Typography
@@ -71,4 +72,4 @@ const SendMail: NextPage = () => {
   )
 }
 
-export default SendMail
+export default PasswordUpdated

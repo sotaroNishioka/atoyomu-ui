@@ -3,12 +3,12 @@ import { Box, Container, Typography } from '@mui/material'
 import { getAuth } from 'firebase/auth'
 import type { NextPage } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { AppLogo } from '../common/static/images'
-import { Mail as SendMailImage } from '../features/Auth/statics/images'
+import { AppLogo, Exclamation } from '../common/static/images'
 
-const SendMail: NextPage = () => {
+const Page404: NextPage = () => {
   const auth = getAuth()
   const router = useRouter()
 
@@ -33,7 +33,7 @@ const SendMail: NextPage = () => {
           <Image width="300" height="75" alt="icon" src={AppLogo} />
         </Box>
         <Box>
-          <Image width="240" height="240" alt="sendmail" src={SendMailImage} />
+          <Image width="240" height="240" alt="exclamation" src={Exclamation} />
         </Box>
         <Box>
           <Typography
@@ -43,22 +43,32 @@ const SendMail: NextPage = () => {
             variant="h5"
             sx={{ mb: 1 }}
           >
-            Thank You!!
+            404
           </Typography>
           <Typography
             color="primary"
             align="center"
             variant="subtitle1"
             fontWeight="bold"
+            sx={{ mb: 2 }}
           >
-            ご登録いただいたメールアドレスに
-            <br />
-            メールを送信しましたのでご確認ください。
+            エラーが発生しました。
           </Typography>
+          <Link href="/" passHref>
+            <Typography
+              color="primary"
+              align="center"
+              variant="h6"
+              fontWeight="bold"
+              sx={{ cursor: 'pointer' }}
+            >
+              トップページへ
+            </Typography>
+          </Link>
         </Box>
       </Box>
     </Container>
   )
 }
 
-export default SendMail
+export default Page404
