@@ -18,7 +18,7 @@ const Header = () => {
   const { isMobileSize } = useSize()
 
   // state
-  const [isLogin, setIsLogin] = useState<boolean>(false)
+  const [isLogin, setIsLogin] = useState<boolean>(true)
 
   // effect
   onAuthStateChanged(auth, (user) => {
