@@ -2,26 +2,25 @@
 import { Grid } from '@mui/material'
 import type { NextPage } from 'next'
 import AuthRoute from '../components/ui-parts/AuthRoute'
-import Header from '../components/ui-parts/Header'
+import DrawerLayOut from '../components/ui-parts/Layout/DrawerLayOut'
 import { LogOutButton } from '../features/Auth'
 
 const Home: NextPage = () => (
   <AuthRoute>
-    <>
-      <Header />
+    <DrawerLayOut>
       <Grid
         container
         spacing={0}
         direction="column"
         alignItems="center"
         justifyContent="center"
-        style={{ minHeight: '200vh' }}
+        style={{ minHeight: '120vh' }}
       >
         <Grid item xs={6}>
           <LogOutButton />
         </Grid>
       </Grid>
-    </>
+    </DrawerLayOut>
   </AuthRoute>
 )
 

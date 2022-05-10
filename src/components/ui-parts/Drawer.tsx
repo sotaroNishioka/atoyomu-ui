@@ -9,19 +9,21 @@ import {
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import useDrawer from '../../common/hooks/useDrawer'
+import useSize from '../../common/hooks/useSize'
 
 const Drawer = () => {
+  // init
   const drawer = useDrawer()
+  const { drawerWidth, headerHight, isMobileSize } = useSize()
 
   const list = (
     <Box
-      sx={{ width: 250 }}
       role="presentation"
       onClick={drawer.closeDrawer}
       onKeyDown={drawer.closeDrawer}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['s', 's', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <MoveToInbox /> : <MoveToInbox />}
@@ -46,17 +48,25 @@ const Drawer = () => {
 
   return (
     <DrawerMUI
-      PaperProps={{
-        sx: {
-          borderRight: 1,
-          borderRightColor: 'secondary.main'
-        }
-      }}
       anchor="left"
-      elevation={0}
       open={drawer.isOpen}
       onClose={drawer.closeDrawer}
-      BackdropProps={{ style: { backgroundColor: 'transparent' } }}
+      elevation={0}
+      variant={isMobileSize ? 'temporary' : 'permanent'}
+      sx={{
+        width: drawerWidth,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth
+        }
+      }}
+      PaperProps={{
+        sx: {
+          mt: `${headerHight + 1}px`,
+          borderRight: 1,
+          borderColor: 'secondary.main'
+        }
+      }}
+      BackdropProps={{ sx: { backgroundColor: 'transparent' } }}
     >
       {list}
     </DrawerMUI>

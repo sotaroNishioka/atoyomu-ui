@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
+import { CssBaseline } from '@mui/material'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
       </Head>
+      <CssBaseline />
       <MyThemeProvider>
         <IndexProvider>
           <Component {...pageProps} />

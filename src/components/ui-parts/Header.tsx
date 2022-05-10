@@ -1,30 +1,33 @@
-import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
-import NotificationsIcon from '@mui/icons-material/Notifications'
-import { AppBar, Badge, Box, Grid, IconButton, Toolbar } from '@mui/material'
-import { getAuth } from 'firebase/auth'
+import { AppBar, Box, Grid, IconButton, Toolbar } from '@mui/material'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useState } from 'react'
 import useDrawer from '../../common/hooks/useDrawer'
 import useSize from '../../common/hooks/useSize'
 import { AppLogo } from '../../common/static/images'
 import OutLinedButton from '../ui-elements/OutLinedButton'
 import TextButton from '../ui-elements/TextButton'
-import Drawer from './Drawer'
 
 const Header = () => {
   // init
   const auth = getAuth()
-
-  // state
-
-  // context
   const drawer = useDrawer()
   const router = useRouter()
   const { isMobileSize } = useSize()
 
+  // state
+  const [isLogin, setIsLogin] = useState<boolean>(false)
+
   // effect
+  onAuthStateChanged(auth, (user) => {
+    if (user === null) {
+      setIsLogin(false)
+      return
+    }
+    setIsLogin(true)
+  })
 
   // functions
   const onClickLogin = () => {
@@ -34,28 +37,7 @@ const Header = () => {
     router.push('/signup')
   }
 
-  const loginUserMenu = (
-    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-      <IconButton
-        size="large"
-        aria-label="show 4 new mails"
-        // color="secondary.light"
-      >
-        <Badge badgeContent={4} color="error">
-          <MailIcon />
-        </Badge>
-      </IconButton>
-      <IconButton
-        size="large"
-        aria-label="show 17 new notifications"
-        color="secondary"
-      >
-        <Badge badgeContent={17} color="error">
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
-    </Box>
-  )
+  // 未ログインの場合
   const unregisteredUserMenu = (
     <Box>
       <TextButton
@@ -70,7 +52,7 @@ const Header = () => {
 
   return (
     <AppBar
-      position="absolute"
+      position="fixed"
       elevation={0}
       sx={{
         borderBottom: 1,
@@ -86,13 +68,11 @@ const Header = () => {
         justifyContent="center"
       >
         <Toolbar style={{ maxWidth: 1200, width: '100%' }}>
-          {auth.currentUser !== null && (
+          {isLogin && isMobileSize && (
             <IconButton
               size="large"
               edge="start"
               color="secondary"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
               onClick={drawer.openDrawer}
             >
               <MenuIcon />
@@ -105,10 +85,9 @@ const Header = () => {
             src={AppLogo}
           />
           <Box sx={{ flexGrow: 1 }} />
-          {auth.currentUser !== null ? loginUserMenu : unregisteredUserMenu}
+          {isLogin === false && unregisteredUserMenu}
         </Toolbar>
       </Grid>
-      <Drawer />
     </AppBar>
   )
 }
