@@ -16,8 +16,8 @@ export default function MyThemeProvider({
         // contrastText: will be calculated to contrast with palette.primary.main
       },
       secondary: {
-        main: '#808080',
-        light: '#CCCCCC',
+        main: '#CCCCCC',
+        light: '#DDDDDD',
         // dark: will be calculated from palette.secondary.main,
         contrastText: '#ffcc00'
       },
