@@ -33,7 +33,10 @@ const DrawerProvider = ({ children }: { children: ReactElement<any, any> }) => {
   }, [isMobileSize])
 
   // function
-  const closeDrawer = useCallback(() => setIsOpen(false), [])
+  const closeDrawer = useCallback(() => {
+    console.log('closeDrawer')
+    setIsOpen(false)
+  }, [])
   const openDrawer = useCallback(() => setIsOpen(true), [])
   const val = useMemo(() => ({ isOpen, closeDrawer, openDrawer }), [isOpen])
 

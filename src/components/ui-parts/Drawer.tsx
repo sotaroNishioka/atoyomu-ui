@@ -29,21 +29,25 @@ const Drawer = () => {
   const list = (
     <Box
       role="presentation"
-      onClick={drawer.closeDrawer}
-      onKeyDown={drawer.closeDrawer}
       sx={{ height: '100%', alignContent: 'space-between' }}
     >
       <List dense sx={{ height: '100%', pt: 0, pb: 0 }}>
-        {['s', 's', 'Send email', 's', 's', 'Send email', 's'].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <MoveToInbox /> : <MoveToInbox />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          )
-        )}
+        {[
+          'ssss',
+          'sdddd',
+          'Send fffemail',
+          'sgggg',
+          'shhhh',
+          'Sendjjjj email',
+          'kkkkks'
+        ].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <MoveToInbox /> : <MoveToInbox />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
         <Box
           sx={{
             bottom: 72,
@@ -68,11 +72,11 @@ const Drawer = () => {
             open={settingAnchorEl !== null}
             onClose={() => setSettingAnchorEl(null)}
             anchorOrigin={{
-              vertical: 'bottom',
+              vertical: 'top',
               horizontal: 'left'
             }}
             transformOrigin={{
-              vertical: 'center',
+              vertical: 'bottom',
               horizontal: 'left'
             }}
             MenuListProps={{
