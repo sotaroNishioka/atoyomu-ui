@@ -2,11 +2,11 @@ import { ExitToApp, MoveToInbox, Settings } from '@mui/icons-material'
 import {
   Box,
   Divider,
+  Drawer as DrawerMUI,
   List,
   ListItem,
   Menu,
-  MenuList,
-  SwipeableDrawer as DrawerMUI
+  MenuList
 } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
@@ -70,7 +70,11 @@ const Drawer = () => {
             id="positioned-menu"
             anchorEl={settingAnchorEl}
             open={settingAnchorEl !== null}
-            onClose={() => setSettingAnchorEl(null)}
+            onClose={() => {
+              drawer.closeDrawer()
+              setSettingAnchorEl(null)
+            }}
+            transitionDuration={0}
             anchorOrigin={{
               vertical: 'top',
               horizontal: 'left'
@@ -112,8 +116,8 @@ const Drawer = () => {
       anchor="left"
       open={drawer.isOpen}
       onClose={drawer.closeDrawer}
-      onOpen={drawer.openDrawer}
       elevation={0}
+      transitionDuration={0}
       variant={isMobileSize ? 'temporary' : 'permanent'}
       sx={{
         width: drawerWidth,
