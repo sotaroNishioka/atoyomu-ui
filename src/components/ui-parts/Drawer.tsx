@@ -50,7 +50,7 @@ const Drawer = () => {
         ))}
         <Box
           sx={{
-            bottom: 72,
+            bottom: isMobileSize ? 57 : 65,
             width: '100%',
             position: 'absolute'
           }}
