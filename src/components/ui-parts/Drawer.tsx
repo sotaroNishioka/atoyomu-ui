@@ -1,4 +1,4 @@
-import { MoveToInbox, Settings, SignpostOutlined } from '@mui/icons-material'
+import { ExitToApp, MoveToInbox, Settings } from '@mui/icons-material'
 import {
   Box,
   Divider,
@@ -33,7 +33,7 @@ const Drawer = () => {
       onKeyDown={drawer.closeDrawer}
       sx={{ height: '100%', alignContent: 'space-between' }}
     >
-      <List dense sx={{ height: '100%' }}>
+      <List dense sx={{ height: '100%', pt: 0, pb: 0 }}>
         {['s', 's', 'Send email', 's', 's', 'Send email', 's'].map(
           (text, index) => (
             <ListItem button key={text}>
@@ -75,8 +75,14 @@ const Drawer = () => {
               vertical: 'center',
               horizontal: 'left'
             }}
-            sx={{ color: 'red' }}
-            MenuListProps={{ sx: { border: 1, borderColor: 'secondary.main' } }}
+            MenuListProps={{
+              sx: {
+                border: 1,
+                borderColor: 'secondary.main',
+                pt: 0,
+                pb: 0
+              }
+            }}
           >
             <MenuList dense sx={{ pt: 0, pb: 0 }}>
               <ListItem
@@ -86,7 +92,7 @@ const Drawer = () => {
                 }}
               >
                 <ListItemIcon>
-                  <SignpostOutlined fontSize="small" />
+                  <ExitToApp fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="ログアウト" />
               </ListItem>
@@ -103,6 +109,7 @@ const Drawer = () => {
       open={drawer.isOpen}
       onClose={drawer.closeDrawer}
       onOpen={drawer.openDrawer}
+      elevation={0}
       variant={isMobileSize ? 'temporary' : 'permanent'}
       sx={{
         width: drawerWidth,
