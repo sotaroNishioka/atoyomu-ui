@@ -1,12 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {
-  Box,
-  FormHelperText,
-  Grid,
-  Link,
-  TextField,
-  Typography
-} from '@mui/material'
+import { Box, FormHelperText, Grid, Link, TextField } from '@mui/material'
 import useKeyboard from '../../../../common/hooks/useKeyboard'
 import useLogIn from '../../hooks/useLogin'
 import EmailButton from '../ui-elements/EmailButton'
@@ -26,17 +19,6 @@ export const LoginForm = () => {
 
   return (
     <Box maxWidth={480} sx={{ width: 1 }}>
-      <Typography color="primary" fontWeight="bold" align="left" variant="h5">
-        ログイン
-      </Typography>
-      <Typography
-        color="primary"
-        align="left"
-        variant="subtitle1"
-        sx={{ mb: 4, mt: 2 }}
-      >
-        メールアドレスとパスワードを入力してください。
-      </Typography>
       <TextField
         margin="dense"
         required
