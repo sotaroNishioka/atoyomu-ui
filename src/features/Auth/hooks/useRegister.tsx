@@ -65,6 +65,7 @@ const useRegister = () => {
           email: user.email,
           displayName: user.displayName,
           photoURL: user.photoURL,
+          isEmailUser: true,
           lastLoginedAt: serverTimestamp(),
           updatedAt: serverTimestamp(),
           createdAt: serverTimestamp()

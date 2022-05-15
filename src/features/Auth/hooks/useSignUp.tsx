@@ -75,6 +75,7 @@ const useSignUp = () => {
     } catch (e: any) {
       if (e.message === 'not_new_user') {
         message.showMessage(IS_NOT_NEW_USER)
+        router.push('/signup')
         return
       }
       message.showMessage(SIGNUP_UNEXPEECTED_ERROR)

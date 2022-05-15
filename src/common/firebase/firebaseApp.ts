@@ -1,5 +1,7 @@
 import { getApp, getApps, initializeApp } from 'firebase/app'
-import { getFirestore } from 'firebase/firestore'
+import { connectAuthEmulator, getAuth } from 'firebase/auth'
+import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore'
+import { connectFunctionsEmulator, getFunctions } from 'firebase/functions'
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
@@ -15,4 +17,27 @@ export const initFirebase = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp()
 
-export const db = getFirestore()
+export const db = (() => {
+  const res = getFirestore()
+  if (process.env.NODE_ENV === 'development') {
+    connectFirestoreEmulator(res, 'localhost', 8080)
+  }
+  return res
+})()
+
+export const auth = (() => {
+  const res = getAuth()
+  if (process.env.NODE_ENV === 'development') {
+    connectAuthEmulator(res, 'http://localhost:9099')
+  }
+  return res
+})()
+
+export const functions = (() => {
+  const res = getFunctions(initFirebase)
+  res.region = 'asia-northeast1'
+  if (process.env.NODE_ENV === 'development') {
+    connectFunctionsEmulator(res, 'localhost', 5001)
+  }
+  return res
+})()
