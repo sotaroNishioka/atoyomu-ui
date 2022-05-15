@@ -8,6 +8,7 @@ import {
 } from '@mui/material'
 import type { NextPage } from 'next'
 import React from 'react'
+import useKeyboard from '../../../../common/hooks/useKeyboard'
 import useLoading from '../../../../common/hooks/useLoading'
 import { isValidPassword } from '../../../../common/util/validator'
 import useRegister from '../../hooks/useRegister'
@@ -15,6 +16,7 @@ import useRegister from '../../hooks/useRegister'
 export const RegisterForm: NextPage = () => {
   const register = useRegister()
   const loading = useLoading()
+  const keyboard = useKeyboard()
 
   return (
     <Box maxWidth={480} sx={{ width: 1 }}>
@@ -52,6 +54,14 @@ export const RegisterForm: NextPage = () => {
       <TextField
         value={register.password1}
         onChange={(event) => register.setPassword1(event.target.value)}
+        onKeyPress={(event) =>
+          keyboard.onPressEnter(() => {
+            if (!register.isValidInput || loading.isLoading) {
+              return
+            }
+            register.signUpWithEmail()
+          }, event)
+        }
         required
         fullWidth
         name="password"
@@ -77,6 +87,14 @@ export const RegisterForm: NextPage = () => {
       <TextField
         value={register.password2}
         onChange={(event) => register.setPassword2(event.target.value)}
+        onKeyPress={(event) =>
+          keyboard.onPressEnter(() => {
+            if (!register.isValidInput || loading.isLoading) {
+              return
+            }
+            register.signUpWithEmail()
+          }, event)
+        }
         required
         fullWidth
         name="password"

@@ -4,9 +4,9 @@ import { CssBaseline } from '@mui/material'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import React from 'react'
+import IndexProvider from '../common/contexts/IndexProvider'
+import MyThemeProvider from '../common/contexts/MyThemeProvider'
 import { initFirebase } from '../common/firebase/firebaseApp'
-import IndexProvider from '../common/providers/IndexProvider'
-import MyThemeProvider from '../common/providers/MyThemeProvider'
 
 function MyApp({ Component, pageProps }: AppProps) {
   // firebaseの初期化

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { DrawerContext } from '../providers/DrawerProvider'
+import { DrawerContext } from '../contexts/DrawerContext'
 
 const useDrawer = () => useContext(DrawerContext)
 

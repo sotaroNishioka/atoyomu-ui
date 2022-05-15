@@ -10,14 +10,14 @@ import {
 } from '@mui/material'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { getAuth } from 'firebase/auth'
 import { useState } from 'react'
+import useAuth from '../../common/hooks/useAuth'
 import useDrawer from '../../common/hooks/useDrawer'
 import useSize from '../../common/hooks/useSize'
 
 const Drawer = () => {
   // init
-  const auth = getAuth()
+  const auth = useAuth()
   const drawer = useDrawer()
   const { drawerWidth, headerHight, isMobileSize } = useSize()
 
@@ -93,12 +93,7 @@ const Drawer = () => {
             }}
           >
             <MenuList dense sx={{ pt: 0, pb: 0 }}>
-              <ListItem
-                button
-                onClick={() => {
-                  auth.signOut()
-                }}
-              >
+              <ListItem button onClick={auth.signOut}>
                 <ListItemIcon>
                   <ExitToApp fontSize="small" />
                 </ListItemIcon>
