@@ -58,3 +58,7 @@ export const RESET_PASSWORD_INVALID_URL = {
   message:
     'ご登録いただいた内容を確認できませんでした。画面をリロードして再度お試しください。'
 }
+export const UNEXPECTED_ERROR = {
+  type: 'error',
+  message: 'エラーが発生しました。画面をリロードして再度お試しください。'
+}

@@ -8,8 +8,8 @@ import {
 } from '@mui/material'
 import type { NextPage } from 'next'
 import React from 'react'
-import useLoading from '../../../../common/hooks/useLoading'
-import useAuthAction from '../../hooks/useAuthAction'
+import useLoading from '../../../common/hooks/useLoading'
+import useAuthAction from './useAuthActionForm'
 
 export const AuthActionForm: NextPage = () => {
   const authAction = useAuthAction()

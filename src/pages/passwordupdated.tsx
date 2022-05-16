@@ -6,9 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
-import { AppLogo } from '../common/static/images'
-import UnAuthRoute from '../components/ui-parts/UnAuthRoute'
-import { Check } from '../features/Auth/statics/images'
+import { AppLogo, Check } from '../common/static/images'
+import UnAuthRoute from '../components/functional/UnAuthRoute'
 
 const PasswordUpdated: NextPage = () => {
   const auth = getAuth()

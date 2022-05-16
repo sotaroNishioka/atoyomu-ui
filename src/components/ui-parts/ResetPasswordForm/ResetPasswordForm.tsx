@@ -1,17 +1,23 @@
-import { Box, FormHelperText, TextField, Typography } from '@mui/material'
+import { Email } from '@mui/icons-material'
+import {
+  Box,
+  Button,
+  FormHelperText,
+  TextField,
+  Typography
+} from '@mui/material'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import useKeyboard from '../../../../common/hooks/useKeyboard'
-import useLoading from '../../../../common/hooks/useLoading'
-import useMessage from '../../../../common/hooks/useMessage'
-import { isValidEmail } from '../../../../common/util/validator'
-import useSignUp from '../../hooks/useSignUp'
+import useKeyboard from '../../../common/hooks/useKeyboard'
+import useLoading from '../../../common/hooks/useLoading'
+import useMessage from '../../../common/hooks/useMessage'
+import { isValidEmail } from '../../../common/util/validator'
 import {
   FAILED_RESET_PASSWORD,
   RESET_PASSWORD_EMAIL_IS_NOT_EXSITS
-} from '../../statics/texts/message'
-import EmailButton from '../ui-elements/EmailButton'
+} from '../../../common/static/messages'
+import useSignUp from '../SignUpForm/useSignUpForm'
 
 export const ResetPasswordForm = () => {
   const auth = getAuth()
@@ -92,7 +98,18 @@ export const ResetPasswordForm = () => {
       <FormHelperText error>
         {emailError === '' ? '　' : emailError}
       </FormHelperText>
-      <EmailButton onClick={onSubmitPassReset} text="パスワードをリセット" />
+
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={onSubmitPassReset}
+        startIcon={<Email />}
+        disabled={loading.isLoading}
+      >
+        パスワードをリセット
+      </Button>
     </Box>
   )
 }

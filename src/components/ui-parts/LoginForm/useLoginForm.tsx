@@ -13,9 +13,12 @@ import { db } from '../../../common/firebase/firebaseApp'
 import useLoading from '../../../common/hooks/useLoading'
 import useMessage from '../../../common/hooks/useMessage'
 import { isValidEmail, isValidPassword } from '../../../common/util/validator'
-import { INVALID_LOGIN_DATA, USER_IS_NOT_EXIST } from '../statics/texts/message'
+import {
+  INVALID_LOGIN_DATA,
+  USER_IS_NOT_EXIST
+} from '../../../common/static/messages'
 
-const useLogIn = () => {
+const useLoginForm = () => {
   // hooks
   const auth = getAuth()
   const loading = useLoading()
@@ -126,4 +129,4 @@ const useLogIn = () => {
   }
 }
 
-export default useLogIn
+export default useLoginForm

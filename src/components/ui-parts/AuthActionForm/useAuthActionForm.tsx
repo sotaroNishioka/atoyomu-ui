@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import useMessage from '../../../common/hooks/useMessage'
 import { isValidPassword } from '../../../common/util/validator'
-import { RESET_PASSWORD_INVALID_URL } from '../statics/texts/message'
+import { RESET_PASSWORD_INVALID_URL } from '../../../common/static/messages'
 
-const useAuthAction = () => {
+const useAuthActionForm = () => {
   const auth = getAuth()
   const router = useRouter()
   const message = useMessage()
@@ -55,4 +55,4 @@ const useAuthAction = () => {
   }
 }
 
-export default useAuthAction
+export default useAuthActionForm

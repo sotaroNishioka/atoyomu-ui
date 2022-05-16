@@ -7,8 +7,8 @@ import React, { useState } from 'react'
 import useDrawer from '../../common/hooks/useDrawer'
 import useSize from '../../common/hooks/useSize'
 import { AppLogo } from '../../common/static/images'
-import OutLinedButton from '../ui-elements/OutLinedButton'
-import TextButton from '../ui-elements/TextButton'
+import OutLinedButton from '../ui-elements/button/OutLinedButton'
+import TextButton from '../ui-elements/button/TextButton'
 
 const Header = () => {
   // init

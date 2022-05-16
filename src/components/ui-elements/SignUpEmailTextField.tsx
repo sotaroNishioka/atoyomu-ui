@@ -1,5 +1,5 @@
 import { Box, FormHelperText, TextField } from '@mui/material'
-import useKeyboard from '../../../../common/hooks/useKeyboard'
+import useKeyboard from '../../common/hooks/useKeyboard'
 
 const SignUpTextField: React.FC<{
   email: string

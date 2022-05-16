@@ -1,6 +1,6 @@
 import { Email } from '@mui/icons-material'
 import { Button } from '@mui/material'
-import useLoading from '../../../../common/hooks/useLoading'
+import useLoading from '../../../common/hooks/useLoading'
 
 const EmailButton: React.FC<{ onClick: () => Promise<void>; text: string }> = ({
   onClick,

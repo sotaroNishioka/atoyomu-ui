@@ -4,8 +4,8 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import React from 'react'
 import { AppLogo } from '../common/static/images'
-import UnAuthRoute from '../components/ui-parts/UnAuthRoute'
-import { ResetPasswordForm } from '../features/Auth'
+import UnAuthRoute from '../components/functional/UnAuthRoute'
+import { ResetPasswordForm } from '../components/ui-parts/ResetPasswordForm/ResetPasswordForm'
 
 const ResetPassword: NextPage = () => (
   <UnAuthRoute>

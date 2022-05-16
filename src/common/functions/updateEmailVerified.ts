@@ -1,6 +1,6 @@
 import { getFunctions, httpsCallable } from 'firebase/functions'
 import useMessage from '../hooks/useMessage'
-import { UNEXPECTED_ERROR } from '../static/messages/messages'
+import { UNEXPECTED_ERROR } from '../static/messages'
 
 const updateEmailVerified = async (): Promise<void> => {
   const functions = getFunctions()

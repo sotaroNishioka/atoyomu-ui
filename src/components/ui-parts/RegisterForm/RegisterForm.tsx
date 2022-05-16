@@ -8,10 +8,10 @@ import {
 } from '@mui/material'
 import type { NextPage } from 'next'
 import React from 'react'
-import useKeyboard from '../../../../common/hooks/useKeyboard'
-import useLoading from '../../../../common/hooks/useLoading'
-import { isValidPassword } from '../../../../common/util/validator'
-import useRegister from '../../hooks/useRegister'
+import useKeyboard from '../../../common/hooks/useKeyboard'
+import useLoading from '../../../common/hooks/useLoading'
+import { isValidPassword } from '../../../common/util/validator'
+import useRegister from './useRegisterForm'
 
 export const RegisterForm: NextPage = () => {
   const register = useRegister()

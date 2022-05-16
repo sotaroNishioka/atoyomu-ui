@@ -1,9 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Box, FormHelperText, Grid, Link, TextField } from '@mui/material'
-import useKeyboard from '../../../../common/hooks/useKeyboard'
-import useLogIn from '../../hooks/useLogin'
-import EmailButton from '../ui-elements/EmailButton'
-import GoogleButton from '../ui-elements/GoogleButton'
+import { Email } from '@mui/icons-material'
+import {
+  Box,
+  Button,
+  FormHelperText,
+  Grid,
+  Link,
+  TextField
+} from '@mui/material'
+import useKeyboard from '../../../common/hooks/useKeyboard'
+import useLoading from '../../../common/hooks/useLoading'
+import GoogleButton from '../../ui-elements/button/GoogleButton'
+import useLogIn from './useLoginForm'
 
 export const LoginForm = () => {
   // hooks
@@ -16,6 +24,7 @@ export const LoginForm = () => {
     loginWithEmail,
     loginWithGoogle
   } = useLogIn()
+  const loading = useLoading()
 
   return (
     <Box maxWidth={480} sx={{ width: 1 }}>
@@ -55,7 +64,17 @@ export const LoginForm = () => {
           </Link>
         </Grid>
       </Grid>
-      <EmailButton onClick={loginWithEmail} text="ログイン" />
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={loginWithEmail}
+        startIcon={<Email />}
+        disabled={loading.isLoading}
+      >
+        ログイン
+      </Button>
       <Grid container justifyContent="center">
         <Grid item>
           <Link href="/resetpassword" variant="body2">

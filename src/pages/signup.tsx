@@ -4,8 +4,8 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import React from 'react'
 import { AppLogo } from '../common/static/images'
-import UnAuthRoute from '../components/ui-parts/UnAuthRoute'
-import { SignUpForm } from '../features/Auth'
+import UnAuthRoute from '../components/functional/UnAuthRoute'
+import { SignUpForm } from '../components/ui-parts/SignUpForm/SignUpForm'
 
 const SignUp: NextPage = () => (
   <UnAuthRoute>

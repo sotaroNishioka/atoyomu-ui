@@ -12,9 +12,9 @@ import {
   EXPIRED_TEMPORALY_REGISTER,
   INVALID_TEMPORALY_REGISTER,
   REGISTER_UNEXPECTED_ERROR
-} from '../statics/texts/message'
+} from '../../../common/static/messages'
 
-const useRegister = () => {
+const useRegisterForm = () => {
   const auth = getAuth()
   const router = useRouter()
   const message = useMessage()
@@ -138,4 +138,4 @@ const useRegister = () => {
   }
 }
 
-export default useRegister
+export default useRegisterForm

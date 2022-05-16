@@ -22,13 +22,13 @@ import useLoading from '../../../common/hooks/useLoading'
 import useMessage from '../../../common/hooks/useMessage'
 import { addTime } from '../../../common/util/uuid'
 import { isValidEmail } from '../../../common/util/validator'
-import { registerMail } from '../statics/texts/mail'
+import { registerMail } from '../../../common/static/mail'
 import {
   IS_NOT_NEW_USER,
   SIGNUP_UNEXPEECTED_ERROR
-} from '../statics/texts/message'
+} from '../../../common/static/messages'
 
-const useSignUp = () => {
+const useSignUpForm = () => {
   const auth = getAuth()
   const router = useRouter()
   const loading = useLoading()
@@ -157,4 +157,4 @@ const useSignUp = () => {
   }
 }
 
-export default useSignUp
+export default useSignUpForm

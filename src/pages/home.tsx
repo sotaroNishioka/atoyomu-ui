@@ -1,9 +1,9 @@
 /* eslint-disable react/button-has-type */
 import { Grid } from '@mui/material'
 import type { NextPage } from 'next'
-import AuthRoute from '../components/ui-parts/AuthRoute'
+import AuthRoute from '../components/ui-elements/AuthRoute'
+import LogOutButton from '../components/ui-elements/button/LogOutButton'
 import DrawerLayOut from '../components/ui-parts/Layout/DrawerLayOut'
-import { LogOutButton } from '../features/Auth'
 
 const Home: NextPage = () => (
   <AuthRoute>

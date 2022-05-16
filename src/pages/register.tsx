@@ -6,8 +6,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { AppLogo } from '../common/static/images'
-import UnAuthRoute from '../components/ui-parts/UnAuthRoute'
-import { RegisterForm } from '../features/Auth'
+import UnAuthRoute from '../components/functional/UnAuthRoute'
+import { RegisterForm } from '../components/ui-parts/RegisterForm/RegisterForm'
 
 const Register: NextPage = () => {
   const auth = getAuth()
