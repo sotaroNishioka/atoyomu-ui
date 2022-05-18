@@ -1,4 +1,4 @@
-import { ExitToApp, MoveToInbox, Settings } from '@mui/icons-material'
+import { AllInbox, Article, ExitToApp, Settings } from '@mui/icons-material'
 import {
   Box,
   Divider,
@@ -19,7 +19,8 @@ const Drawer = () => {
   // init
   const auth = useAuth()
   const drawer = useDrawer()
-  const { drawerWidth, headerHight, isMobileSize } = useSize()
+  const { drawerWidth } = drawer
+  const { headerHight, isMobileSize } = useSize()
 
   // state
   const [settingAnchorEl, setSettingAnchorEl] = useState<null | HTMLElement>(
@@ -32,22 +33,18 @@ const Drawer = () => {
       sx={{ height: '100%', alignContent: 'space-between' }}
     >
       <List dense sx={{ height: '100%', pt: 0, pb: 0 }}>
-        {[
-          'ssss',
-          'sdddd',
-          'Send fffemail',
-          'sgggg',
-          'shhhh',
-          'Sendjjjj email',
-          'kkkkks'
-        ].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <MoveToInbox /> : <MoveToInbox />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem button>
+          <ListItemIcon>
+            <AllInbox />
+          </ListItemIcon>
+          <ListItemText>全てのブックマーク</ListItemText>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Article />
+          </ListItemIcon>
+          <ListItemText>未整理</ListItemText>
+        </ListItem>
         <Box
           sx={{
             bottom: isMobileSize ? 57 : 65,

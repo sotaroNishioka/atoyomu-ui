@@ -5,11 +5,9 @@ const useSize = () => {
     theme.breakpoints.down('sm')
   )
 
-  const drawerWidth = 240
-
   const headerHight = isMobileSize ? 56 : 64
 
-  return { isMobileSize, drawerWidth, headerHight }
+  return { isMobileSize, headerHight }
 }
 
 export default useSize

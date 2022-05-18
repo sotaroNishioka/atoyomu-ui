@@ -13,7 +13,7 @@ import TextButton from '../ui-elements/button/TextButton'
 const Header = () => {
   // init
   const auth = getAuth()
-  const drawer = useDrawer()
+  const { drawerWidth, openDrawer } = useDrawer()
   const router = useRouter()
   const { isMobileSize } = useSize()
 
@@ -67,24 +67,37 @@ const Header = () => {
         alignItems="center"
         justifyContent="center"
       >
-        <Toolbar style={{ maxWidth: 1200, width: '100%' }}>
+        <Toolbar
+          style={{ width: '100%' }}
+          disableGutters={isLogin && !isMobileSize}
+        >
           {isLogin && isMobileSize && (
             <IconButton
               size="large"
               edge="start"
               color="secondary"
-              onClick={drawer.openDrawer}
+              onClick={openDrawer}
             >
               <MenuIcon />
             </IconButton>
           )}
-          <Image
-            width={isMobileSize ? '105' : '140'}
-            height={isMobileSize ? '24' : '32'}
-            alt="icon"
-            src={AppLogo}
-          />
+
+          <Box
+            sx={{
+              display: 'inline-flex',
+              width: isMobileSize ? 'auto' : drawerWidth,
+              justifyContent: 'center'
+            }}
+          >
+            <Image
+              width={isMobileSize ? '126' : '140'}
+              height={isMobileSize ? '28.8' : '32'}
+              alt="icon"
+              src={AppLogo}
+            />
+          </Box>
           <Box sx={{ flexGrow: 1 }} />
+
           {isLogin === false && unregisteredUserMenu}
         </Toolbar>
       </Grid>
